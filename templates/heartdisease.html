@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heart Disease Prediction — MedPredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <span class="dot"></span>MedPredict
+  </a>
+  <ul class="nav-links">
+    <li><a href="/diabetes">Diabetes</a></li>
+    <li><a href="/heartdisease/" class="active">Heart Disease</a></li>
+    <li><a href="/parkinsons/">Parkinson's</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="form-header">
+    <a class="back-link" href="/">← Back to Home</a>
+    <h1>❤️ Heart Disease Prediction</h1>
+    <p>Provide your cardiac clinical values to evaluate heart disease risk</p>
+  </div>
+
+  <div class="form-container">
+    <form action="{{ url_for('predictheartdisease') }}" method="post">
+      <div class="form-grid">
+
+        <div class="field-group">
+          <label>Age (years)</label>
+          <input type="number" step="any" name="field1" placeholder="Enter age" required/>
+          <span class="field-hint">Patient age in years</span>
+        </div>
+
+        <div class="field-group">
+          <label>Sex</label>
+          <input type="number" step="any" name="field2" placeholder="0 = Female, 1 = Male" required/>
+          <span class="field-hint">Biological sex (0 or 1)</span>
+        </div>
+
+        <div class="field-group">
+          <label>Chest Pain Type (CP)</label>
+          <input type="number" step="any" name="field3" placeholder="0, 1, 2, or 3" required/>
+          <span class="field-hint">0=typical angina, 1=atypical, 2=non-anginal, 3=asymptomatic</span>
+        </div>
+
+        <div class="field-group">
+          <label>Resting Blood Pressure (mmHg)</label>
+          <input type="number" step="any" name="field4" placeholder="94 – 200" required/>
+          <span class="field-hint">Trestbps on admission</span>
+        </div>
+
+        <div class="field-group">
+          <label>Cholesterol (mg/dL)</label>
+          <input type="number" step="any" name="field5" placeholder="126 – 564" required/>
+          <span class="field-hint">Serum cholesterol</span>
+        </div>
+
+        <div class="field-group">
+          <label>Fasting Blood Sugar (FBS)</label>
+          <input type="number" step="any" name="field6" placeholder="0 or 1" required/>
+          <span class="field-hint">1 if fasting BS &gt; 120 mg/dL, else 0</span>
+        </div>
+
+        <div class="field-group">
+          <label>Resting ECG (RestECG)</label>
+          <input type="number" step="any" name="field7" placeholder="0, 1, or 2" required/>
+          <span class="field-hint">0=normal, 1=ST-T abnormality, 2=LV hypertrophy</span>
+        </div>
+
+        <div class="field-group">
+          <label>Max Heart Rate (Thalach)</label>
+          <input type="number" step="any" name="field8" placeholder="71 – 202" required/>
+          <span class="field-hint">Maximum heart rate achieved</span>
+        </div>
+
+        <div class="field-group">
+          <label>Exercise Induced Angina (Exang)</label>
+          <input type="number" step="any" name="field9" placeholder="0 or 1" required/>
+          <span class="field-hint">1 = yes, 0 = no</span>
+        </div>
+
+        <div class="field-group">
+          <label>ST Depression (Oldpeak)</label>
+          <input type="number" step="any" name="field10" placeholder="0 – 6.20" required/>
+          <span class="field-hint">ST depression induced by exercise</span>
+        </div>
+
+        <div class="field-group">
+          <label>Slope of ST Segment</label>
+          <input type="number" step="any" name="field11" placeholder="0, 1, or 2" required/>
+          <span class="field-hint">0=upsloping, 1=flat, 2=downsloping</span>
+        </div>
+
+        <div class="field-group">
+          <label>Major Vessels (CA)</label>
+          <input type="number" step="any" name="field12" placeholder="0 – 4" required/>
+          <span class="field-hint">Number of major vessels colored by fluoroscopy</span>
+        </div>
+
+        <div class="field-group">
+          <label>Thalassemia (Thal)</label>
+          <input type="number" step="any" name="field13" placeholder="0, 1, 2, or 3" required/>
+          <span class="field-hint">0=normal, 1=fixed defect, 2=reversable defect</span>
+        </div>
+
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-predict">Analyze &amp; Predict</button>
+      </div>
+    </form>
+
+    <div class="disclaimer">
+      ⚠️ This tool is for educational purposes only and should not replace professional medical diagnosis.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

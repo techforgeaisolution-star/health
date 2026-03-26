@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parkinson's Prediction — MedPredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <span class="dot"></span>MedPredict
+  </a>
+  <ul class="nav-links">
+    <li><a href="/diabetes">Diabetes</a></li>
+    <li><a href="/heartdisease/">Heart Disease</a></li>
+    <li><a href="/parkinsons/" class="active">Parkinson's</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="form-header">
+    <a class="back-link" href="/">← Back to Home</a>
+    <h1>🧠 Parkinson's Prediction</h1>
+    <p>Enter voice biomarker measurements to detect Parkinson's disease risk</p>
+  </div>
+
+  <div class="form-container">
+    <form action="{{ url_for('predictparkinsons') }}" method="post">
+      <div class="form-grid">
+
+        <div class="field-group">
+          <label>MDVP:Fo (Hz)</label>
+          <input type="number" step="any" name="field1" placeholder="88.333 – 260.105" required/>
+          <span class="field-hint">Average vocal fundamental frequency</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Fhi (Hz)</label>
+          <input type="number" step="any" name="field2" placeholder="102.145 – 592.030" required/>
+          <span class="field-hint">Maximum vocal fundamental frequency</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Flo (Hz)</label>
+          <input type="number" step="any" name="field3" placeholder="65.476 – 239.170" required/>
+          <span class="field-hint">Minimum vocal fundamental frequency</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Jitter (%)</label>
+          <input type="number" step="any" name="field4" placeholder="0.001680 – 0.033160" required/>
+          <span class="field-hint">Frequency variation measure</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Jitter (Abs)</label>
+          <input type="number" step="any" name="field5" placeholder="0.000007 – 0.000260" required/>
+          <span class="field-hint">Absolute jitter</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:RAP</label>
+          <input type="number" step="any" name="field6" placeholder="0.000680 – 0.021440" required/>
+          <span class="field-hint">Relative average perturbation</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:PPQ</label>
+          <input type="number" step="any" name="field7" placeholder="0.000920 – 0.019580" required/>
+          <span class="field-hint">Five-point period perturbation quotient</span>
+        </div>
+
+        <div class="field-group">
+          <label>Jitter:DDP</label>
+          <input type="number" step="any" name="field8" placeholder="0.002040 – 0.064330" required/>
+          <span class="field-hint">Average absolute difference of jitter</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Shimmer</label>
+          <input type="number" step="any" name="field9" placeholder="0.009540 – 0.119080" required/>
+          <span class="field-hint">Local amplitude variation</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Shimmer (dB)</label>
+          <input type="number" step="any" name="field10" placeholder="0.085 – 1.302" required/>
+          <span class="field-hint">Shimmer in decibels</span>
+        </div>
+
+        <div class="field-group">
+          <label>Shimmer:APQ3</label>
+          <input type="number" step="any" name="field11" placeholder="0.004550 – 0.056470" required/>
+          <span class="field-hint">3-point amplitude perturbation quotient</span>
+        </div>
+
+        <div class="field-group">
+          <label>Shimmer:APQ5</label>
+          <input type="number" step="any" name="field12" placeholder="0.005700 – 0.079400" required/>
+          <span class="field-hint">5-point amplitude perturbation quotient</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:APQ</label>
+          <input type="number" step="any" name="field13" placeholder="0.007190 – 0.137780" required/>
+          <span class="field-hint">11-point amplitude perturbation quotient</span>
+        </div>
+
+        <div class="field-group">
+          <label>Shimmer:DDA</label>
+          <input type="number" step="any" name="field14" placeholder="0.013640 – 0.169420" required/>
+          <span class="field-hint">Average absolute difference of shimmer</span>
+        </div>
+
+        <div class="field-group">
+          <label>NHR</label>
+          <input type="number" step="any" name="field15" placeholder="0.000650 – 0.314820" required/>
+          <span class="field-hint">Noise-to-harmonics ratio</span>
+        </div>
+
+        <div class="field-group">
+          <label>HNR</label>
+          <input type="number" step="any" name="field16" placeholder="8.441 – 33.047" required/>
+          <span class="field-hint">Harmonics-to-noise ratio</span>
+        </div>
+
+        <div class="field-group">
+          <label>RPDE</label>
+          <input type="number" step="any" name="field17" placeholder="0.256570 – 0.685151" required/>
+          <span class="field-hint">Recurrence period density entropy</span>
+        </div>
+
+        <div class="field-group">
+          <label>DFA</label>
+          <input type="number" step="any" name="field18" placeholder="0.574282 – 0.825288" required/>
+          <span class="field-hint">Signal fractal scaling exponent</span>
+        </div>
+
+        <div class="field-group">
+          <label>Spread1</label>
+          <input type="number" step="any" name="field19" placeholder="-7.965 to -2.434" required/>
+          <span class="field-hint">Nonlinear fundamental frequency measure</span>
+        </div>
+
+        <div class="field-group">
+          <label>Spread2</label>
+          <input type="number" step="any" name="field20" placeholder="0.006274 – 0.450493" required/>
+          <span class="field-hint">Nonlinear fundamental frequency measure</span>
+        </div>
+
+        <div class="field-group">
+          <label>D2</label>
+          <input type="number" step="any" name="field21" placeholder="1.423287 – 3.671155" required/>
+          <span class="field-hint">Correlation dimension</span>
+        </div>
+
+        <div class="field-group">
+          <label>PPE</label>
+          <input type="number" step="any" name="field22" placeholder="0.044539 – 0.527367" required/>
+          <span class="field-hint">Pitch period entropy</span>
+        </div>
+
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-predict">Analyze &amp; Predict</button>
+      </div>
+    </form>
+
+    <div class="disclaimer">
+      ⚠️ This tool is for educational purposes only and should not replace professional medical diagnosis.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

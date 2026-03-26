@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diabetes Prediction — MedPredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <span class="dot"></span>MedPredict
+  </a>
+  <ul class="nav-links">
+    <li><a href="/diabetes" class="active">Diabetes</a></li>
+    <li><a href="/heartdisease/">Heart Disease</a></li>
+    <li><a href="/parkinsons/">Parkinson's</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="form-header">
+    <a class="back-link" href="/">← Back to Home</a>
+    <h1>🩸 Diabetes Prediction</h1>
+    <p>Enter your clinical parameters below to assess diabetes risk</p>
+  </div>
+
+  <div class="form-container">
+    <form action="{{ url_for('predictdiabetes') }}" method="post">
+      <div class="form-grid">
+
+        <div class="field-group">
+          <label>Pregnancies</label>
+          <input type="number" step="any" name="field1" placeholder="0 – 17" required/>
+          <span class="field-hint">Number of times pregnant</span>
+        </div>
+
+        <div class="field-group">
+          <label>Glucose (mg/dL)</label>
+          <input type="number" step="any" name="field2" placeholder="0 – 199" required/>
+          <span class="field-hint">Plasma glucose concentration</span>
+        </div>
+
+        <div class="field-group">
+          <label>Blood Pressure (mmHg)</label>
+          <input type="number" step="any" name="field3" placeholder="0 – 122" required/>
+          <span class="field-hint">Diastolic blood pressure</span>
+        </div>
+
+        <div class="field-group">
+          <label>Skin Thickness (mm)</label>
+          <input type="number" step="any" name="field4" placeholder="0 – 99" required/>
+          <span class="field-hint">Triceps skinfold thickness</span>
+        </div>
+
+        <div class="field-group">
+          <label>Insulin (μU/mL)</label>
+          <input type="number" step="any" name="field5" placeholder="0 – 846" required/>
+          <span class="field-hint">2-Hour serum insulin</span>
+        </div>
+
+        <div class="field-group">
+          <label>BMI (kg/m²)</label>
+          <input type="number" step="any" name="field6" placeholder="0 – 67" required/>
+          <span class="field-hint">Body mass index</span>
+        </div>
+
+        <div class="field-group">
+          <label>Diabetes Pedigree Function</label>
+          <input type="number" step="any" name="field7" placeholder="0.078 – 2.420" required/>
+          <span class="field-hint">Genetic diabetes likelihood function</span>
+        </div>
+
+        <div class="field-group">
+          <label>Age (years)</label>
+          <input type="number" step="any" name="field8" placeholder="Enter age" required/>
+          <span class="field-hint">Patient age in years</span>
+        </div>
+
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-predict">Analyze &amp; Predict</button>
+      </div>
+    </form>
+
+    <div class="disclaimer">
+      ⚠️ This tool is for educational purposes only and should not replace professional medical diagnosis.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
