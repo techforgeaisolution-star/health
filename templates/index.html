@@ -90,5 +90,15 @@
   <p>⚠️ For educational purposes only. Not a substitute for professional medical advice.</p>
 </footer>
 
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+</script>
+
 </body>
 </html>

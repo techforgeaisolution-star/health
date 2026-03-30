@@ -15,10 +15,16 @@
     </span>
     DiseasePredict
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="/diabetes">Diabetes</a></li>
     <li><a href="/heartdisease/">Heart Disease</a></li>
     <li><a href="/parkinsons/" class="active">Parkinson's</a></li>
+    <li><a href="/about">About</a></li>
   </ul>
 </nav>
 
@@ -267,5 +273,14 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/validate.js') }}"></script>
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+</script>
 </body>
 </html>
