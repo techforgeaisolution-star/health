@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — DiseasePredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <span class="nav-logo-icon">
+      <img src="{{ url_for('static', filename='images.png') }}" alt="Logo">
+    </span>
+    DiseasePredict
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="/diabetes">Diabetes</a></li>
+    <li><a href="/heartdisease/">Heart Disease</a></li>
+    <li><a href="/parkinsons/">Parkinson's</a></li>
+    <li><a href="/about" class="active">About</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="form-header">
+    <a class="back-link" href="/">← Back to Home</a>
+    <h1>🤝 Our Team</h1>
+    <p>The innovators behind the DiseasePredict AI platform</p>
+  </div>
+
+  <div class="form-container">
+    <div class="team-grid">
+      
+      <!-- Member 1 -->
+      <div class="team-card">
+        <div class="team-avatar">👨‍💻</div>
+        <span class="team-role">Lead Developer</span>
+        <h3>Partho Gorain</h3>
+        <p class="team-info">Dept: CSE · Roll: 22040440064</p>
+        <p class="team-info">IIT Dumka</p>
+        <a href="mailto:parthogorain22617@gmail.com" class="team-email">parthogorain22617@gmail.com</a>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="team-card">
+        <div class="team-avatar">👨‍💻</div>
+        <span class="team-role">AI Engineer</span>
+        <h3>Himanshu Kumar</h3>
+        <p class="team-info">Dept: CSE · Roll: 22040440030</p>
+        <p class="team-info">Engineering Scholar</p>
+        <a href="mailto:himanshukr077@gmail.com" class="team-email">himanshukr077@gmail.com</a>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="team-card">
+        <div class="team-avatar">👨‍💻</div>
+        <span class="team-role">Backend Architect</span>
+        <h3>Rohit Kumar Mandal</h3>
+        <p class="team-info">Dept: CSE · Roll: 22040440065</p>
+        <p class="team-info">Dumka Engineering College</p>
+        <a href="mailto:rohitdmk2004@gmail.com" class="team-email">rohitdmk2004@gmail.com</a>
+      </div>
+
+      <!-- Member 4 -->
+      <div class="team-card">
+        <div class="team-avatar">👨‍💻</div>
+        <span class="team-role">Research Analyst</span>
+        <h3>Rajdeep Kumar</h3>
+        <p class="team-info">Dept: CSE · Roll: 22040440059</p>
+        <p class="team-info">Dumka Engineering College</p>
+        <a href="mailto:rajdipraj8494@gmail.com" class="team-email">rajdipraj8494@gmail.com</a>
+      </div>
+
+      <!-- Member 5 -->
+      <div class="team-card">
+        <div class="team-avatar">👨‍💻</div>
+        <span class="team-role">UI/UX Designer</span>
+        <h3>Shivam Kumar</h3>
+        <p class="team-info">Dept: CSE · Roll: 22040445016</p>
+        <p class="team-info">Dumka Engineering College (DEC)</p>
+        <a href="mailto:shivamkumarbarnwal504@gmail.com" class="team-email">shivamkumarbarnwal504@gmail.com</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+</script>
+</body>
+</html>
