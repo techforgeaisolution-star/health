@@ -1,5 +1,5 @@
 /**
- * Real-time range validation for MedPredict forms
+ * Real-time range validation for DiseasePredict forms
  * Shows inline errors and colors inputs as user types
  */
 (function () {

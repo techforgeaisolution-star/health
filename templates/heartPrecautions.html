@@ -3,14 +3,21 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Heart Disease Result — MedPredict</title>
+  <title>Heart Disease Result — DiseasePredict</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <nav>
   <a class="nav-logo" href="/">
-    <span class="dot"></span>MedPredict
+    <span class="nav-logo-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="none">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </span>
+    DiseasePredict
   </a>
   <ul class="nav-links">
     <li><a href="/diabetes">Diabetes</a></li>
@@ -21,13 +28,30 @@
 
 <div class="result-wrapper" style="align-items:flex-start; padding-top:90px;">
   <div style="max-width:1100px; width:100%;">
-
     <div class="result-with-risk">
-      <div class="result-card">
-        <div class="result-banner {{ result }}">
-          <div class="result-icon">
-            {% if result == 'positive' %}⚠️{% else %}✅{% endif %}
+
+      <div id="reportTarget" class="result-card">
+
+        <div class="report-header">
+          <div class="report-header-inner">
+            <div class="report-header-logo">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="report-brand">DiseasePredict</div>
+              <div class="report-subtitle">❤️ Heart Disease Risk Assessment Report</div>
+            </div>
+            <div class="report-meta">
+              <div id="reportDate"></div>
+              <div>For educational purposes only</div>
+            </div>
           </div>
+        </div>
+
+        <div class="result-banner {{ result }}">
+          <div class="result-icon">{% if result == 'positive' %}⚠️{% else %}✅{% endif %}</div>
           <h2>{{ output_text }}</h2>
           <p>
             {% if result == 'positive' %}
@@ -56,17 +80,29 @@
 
         <div class="result-actions">
           <a href="/heartdisease/" class="btn-outline">← Try Again</a>
+          <button id="downloadBtn" class="btn-download" onclick="downloadReport('Heart_Disease')">
+            <svg class="dl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <div class="dl-spinner"></div>
+            <span class="btn-label">Download PDF</span>
+          </button>
           <a href="/" class="btn-solid">Other Predictions</a>
         </div>
       </div>
 
-      <div>
-        {% include 'risk_panel.html' %}
-      </div>
+      <div>{% include 'risk_panel.html' %}</div>
     </div>
-
   </div>
 </div>
 
+<script src="{{ url_for('static', filename='js/download-report.js') }}"></script>
+<script>
+  document.getElementById('reportDate').textContent =
+    new Date().toLocaleDateString('en-IN', {day:'numeric', month:'long', year:'numeric'});
+</script>
 </body>
 </html>
