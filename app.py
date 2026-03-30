@@ -58,6 +58,11 @@ def heartdisease():
     return render_template("heartdisease.html")
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
 @app.route("/predictdiabetes/", methods=["POST"])
 def predictdiabetes():
     int_features = [x for x in request.form.values()]

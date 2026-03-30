@@ -19,6 +19,8 @@
   </a>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span>
+    <span></span>
+    <span></span>
   </button>
   <ul class="nav-links" id="navLinks">
     <li><a href="/diabetes">Diabetes</a></li>
@@ -37,7 +39,13 @@
         <div class="report-header">
           <div class="report-header-inner">
             <div class="report-header-logo">
-              <v class="report-meta">
+              <img src="{{ url_for('static', filename='images.png') }}" alt="Logo">
+            </div>
+            <div>
+              <div class="report-brand">DiseasePredict</div>
+              <div class="report-subtitle">Parkinson's Disease Risk Assessment Report</div>
+            </div>
+            <div class="report-meta">
               <div id="reportDate"></div>
               <div>For educational purposes only</div>
             </div>
