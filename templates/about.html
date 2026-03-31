@@ -1,153 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us — DiseasePredict</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - DiseasePredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
+  <nav>
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="white" style="width:20px;height:20px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <span>DiseasePredict</span>
+    </a>
+    <button class="nav-toggle" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/diabetes">Diabetes</a></li>
+      <li><a href="/heartdisease/">Heart Disease</a></li>
+      <li><a href="/parkinsons/">Parkinson's</a></li>
+      <li><a href="/about" class="active">About</a></li>
+    </ul>
+  </nav>
 
-<nav>
-  <a class="nav-logo" href="/">
-    <span class="nav-logo-icon">
-      <img src="{{ url_for('static', filename='images.png') }}" alt="Logo">
-    </span>
-    DiseasePredict
-  </a>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="/diabetes">Diabetes</a></li>
-    <li><a href="/heartdisease/">Heart Disease</a></li>
-    <li><a href="/parkinsons/">Parkinson's</a></li>
-    <li><a href="/about" class="active">About</a></li>
-  </ul>
-</nav>
-
-<div class="page-wrapper">
-  <div class="form-header">
-    <a class="back-link" href="/">← Back to Home</a>
-    <h1>🤝 Our Team</h1>
-    <p>The innovators behind the DiseasePredict AI platform</p>
-  </div>
-
-  <div class="form-container">
-    <!-- Mission Section -->
-    <div class="about-mission">
-      <div class="mission-icon">🚀</div>
-      <h2>Empowering Health Through AI</h2>
-      <p>
-        DiseasePredict is a cutting-edge platform developed to bridge the gap between complex machine learning and accessible healthcare. 
-        Our mission is to provide early-stage risk assessments that encourage proactive medical consultation.
-      </p>
+  <div class="page-wrapper">
+    <div class="form-header">
+      <a href="/" class="back-link">← Back to Home</a>
+      <h1>About Our <span>Team</span></h1>
+      <p style="color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.85rem; margin-top: 0.75rem;">Government Engineering College, Dumka</p>
     </div>
 
-    <div class="section-divider">
-      <span>Meet the Visionaries</span>
-    </div>
+   
 
-    <div class="team-grid">
-      
-      <!-- Member 1 -->
-      <div class="team-card">
-        <div class="team-avatar"><i class="fa-solid fa-code"></i></div>
-        <span class="team-role">Lead Developer</span>
-        <h3>Partho Gorain</h3>
-        <p class="team-info">Dept: CSE · Roll: 22040440064</p>
-        <p class="team-info">IIT Dumka</p>
-        <a href="mailto:parthogorain22617@gmail.com" class="team-email">parthogorain22617@gmail.com</a>
-        <div class="team-socials">
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-github"></i></a>
+      <div class="section-divider">Our Team</div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">AB</div>
+          <h3>Anushka Bharti</h3>
+          <span class="team-role">Developer</span>
+          <p class="team-info">Roll No: 22040440014</p>
+          <p class="team-info">Department: CSE</p>
+          <a href="mailto:anushkabharti@gmail.com" class="team-email">bhartianushka823@gmail.com </a>
+           <p class="team-info">College: Government Engineering College, Dumka</p>
+        </div>
+
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">HK</div>
+          <h3>Himanshu Kumar</h3>
+          <span class="team-role">Developer</span>
+          <p class="team-info">Roll No: 22040440030</p>
+          <p class="team-info">Department: CSE</p>
+          <a href="mailto:himanshukr077@gmail.com" class="team-email">himanshukr077@gmail.com</a>
+          <p class="team-info">College: Government Engineering College, Dumka</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">RM</div>
+          <h3>Rohit Kumar Mandal</h3>
+          <span class="team-role">Developer</span>
+          <p class="team-info">Roll No: 22040440065</p>
+          <p class="team-info">Department: CSE</p>
+          <a href="mailto:rohitdmk2004@gmail.com" class="team-email">rohitdmk2004@gmail.com</a>
+          <p class="team-info">College: Government Engineering College, Dumka</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">RK</div>
+          <h3>Rajdeep Kumar</h3>
+          <span class="team-role">Developer</span>
+          <p class="team-info">Roll No: 22040440059</p>
+          <p class="team-info">Department: CSE</p>
+          <a href="mailto:rajdipraj8494@gmail.com" class="team-email">rajdipraj8494@gmail.com</a>
+          <p class="team-info">College: Government Engineering College, Dumka</p>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">SK</div>
+          <h3>Shivam Kumar</h3>
+          <span class="team-role">Developer</span>
+          <p class="team-info">Roll No: 22040445016</p>
+          <p class="team-info">Department: CSE</p>
+          <a href="mailto:shivamkumarbarnwal504@gmail.com" class="team-email">shivamkumarbarnwal504@gmail.com</a>
+          <p class="team-info">College: Government Engineering College, Dumka</p>
         </div>
       </div>
-
-      <!-- Member 2 -->
-      <div class="team-card">
-        <div class="team-avatar"><i class="fa-solid fa-microchip"></i></div>
-        <span class="team-role">AI Engineer</span>
-        <h3>Himanshu Kumar</h3>
-        <p class="team-info">Dept: CSE · Roll: 22040440030</p>
-        <p class="team-info">Engineering Scholar</p>
-        <a href="mailto:himanshukr077@gmail.com" class="team-email">himanshukr077@gmail.com</a>
-        <div class="team-socials">
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-github"></i></a>
-        </div>
-      </div>
-
-      <!-- Member 3 -->
-      <div class="team-card">
-        <div class="team-avatar"><i class="fa-solid fa-server"></i></div>
-        <span class="team-role">Backend Architect</span>
-        <h3>Rohit Kumar Mandal</h3>
-        <p class="team-info">Dept: CSE · Roll: 22040440065</p>
-        <p class="team-info">Dumka Engineering College</p>
-        <a href="mailto:rohitdmk2004@gmail.com" class="team-email">rohitdmk2004@gmail.com</a>
-        <div class="team-socials">
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-github"></i></a>
-        </div>
-      </div>
-
-      <!-- Member 4 -->
-      <div class="team-card">
-        <div class="team-avatar"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-        <span class="team-role">Research Analyst</span>
-        <h3>Rajdeep Kumar</h3>
-        <p class="team-info">Dept: CSE · Roll: 22040440059</p>
-        <p class="team-info">Dumka Engineering College</p>
-        <a href="mailto:rajdipraj8494@gmail.com" class="team-email">rajdipraj8494@gmail.com</a>
-        <div class="team-socials">
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-github"></i></a>
-        </div>
-      </div>
-
-      <!-- Member 5 -->
-      <div class="team-card">
-        <div class="team-avatar"><i class="fa-solid fa-pen-nib"></i></div>
-        <span class="team-role">UI/UX Designer</span>
-        <h3>Shivam Kumar</h3>
-        <p class="team-info">Dept: CSE · Roll: 22040445016</p>
-        <p class="team-info">Dumka Engineering College (DEC)</p>
-        <a href="mailto:shivamkumarbarnwal504@gmail.com" class="team-email">shivamkumarbarnwal504@gmail.com</a>
-        <div class="team-socials">
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-github"></i></a>
-        </div>
-      </div>
-
-      <!-- Member 6 -->
-      <div class="team-card">
-        <div class="team-avatar"><i class="fa-solid fa-laptop-code"></i></div>
-        <span class="team-role">Software Engineer</span>
-        <h3>Anushka Bharti</h3>
-        <p class="team-info">Dept: CSE · Roll: 22040440014</p>
-        <p class="team-info">Dumka Engineering College</p>
-        <a href="mailto:bhartianushka823@gmail.com" class="team-email">bhartianushka823@gmail.com</a>
-        <div class="team-socials">
-          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="#"><i class="fa-brands fa-github"></i></a>
-        </div>
-      </div>
-
     </div>
   </div>
-</div>
 
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
-  });
-</script>
+  <script>
+    document.getElementById('navToggle').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
