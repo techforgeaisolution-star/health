@@ -775,37 +775,40 @@ footer {
   .form-grid  { grid-template-columns: 1fr; }
   .stats-row  { grid-template-columns: 1fr; }
   
-  .nav-toggle { display: flex; }
+  .nav-toggle { display: none !important; }
   
   .nav-links {
-    position: fixed;
-    top: 66px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    padding: 2rem;
-    gap: 1rem;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-top: 1px solid var(--border);
+    position: static;
+    transform: none;
+    flex-direction: row;
+    padding: 0;
+    gap: 0.15rem;
+    background: none;
+    backdrop-filter: none;
+    border: none;
+    width: auto;
+    display: flex;
+    margin-left: auto;
   }
 
   .nav-links.active { transform: translateX(0); }
-  .nav-links a { font-size: 0.95rem; padding: 0.85rem; width: 100%; text-align: center; }
+  .nav-links a { 
+    font-size: 0.68rem; 
+    padding: 0.35rem 0.45rem; 
+    width: auto; 
+    text-align: left;
+    white-space: nowrap;
+  }
 
   .hero h1    { font-size: 2.4rem; }
   .result-actions { flex-direction: column; }
-  
   nav { 
-    padding: 0 1.25rem; 
-    justify-content: center; 
+    padding: 0 0.75rem; 
+    justify-content: space-between; 
+    gap: 0.5rem;
   }
-  
-  .nav-toggle { position: absolute; right: 1.25rem; }
-  .nav-logo { gap: 0.5rem; font-size: 1.05rem; }
+  .nav-logo { font-size: 0.95rem; gap: 0.4rem; }
+  .nav-logo-icon { width: 30px; height: 30px; }
 }
 
 /* ── INPUT RANGE VALIDATION ── */
