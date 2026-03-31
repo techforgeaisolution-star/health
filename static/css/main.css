@@ -798,7 +798,14 @@ footer {
 
   .hero h1    { font-size: 2.4rem; }
   .result-actions { flex-direction: column; }
-  nav { padding: 0 1.25rem; }
+  
+  nav { 
+    padding: 0 1.25rem; 
+    justify-content: center; 
+  }
+  
+  .nav-toggle { position: absolute; right: 1.25rem; }
+  .nav-logo { gap: 0.5rem; font-size: 1.05rem; }
 }
 
 /* ── INPUT RANGE VALIDATION ── */
