@@ -41,7 +41,7 @@
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: var(--bg-page);
       min-height: 100vh;
       display: flex;
@@ -94,136 +94,27 @@
       transition: border-color 0.35s ease;
     }
 
-    /* ══════════════════════════════
-       TOP ROW: BACK + TOGGLE
-    ══════════════════════════════ */
-    .ab-toprow {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin: -2.5rem -2.2rem 1.8rem;
-      padding: 1.2rem 2.2rem;
-      background: var(--bg-badge);
-      border-bottom: 1px solid var(--border-card);
+    .about-section {
+      background-color: #C8941A;
+      width: calc(100% + 4.4rem);
+      margin: -2.5rem -2.2rem 2.5rem;
+      padding: 60px 20px;
+      text-align: center;
     }
 
-    .ab-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: color 0.2s;
-    }
-    .ab-back:hover { color: var(--accent); }
-    .ab-back svg { width: 14px; height: 14px; }
-
-    /* ══════════════════════════════
-       BADGE
-    ══════════════════════════════ */
-    .ab-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-badge);
-      background: var(--bg-badge);
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 1.1rem;
-      transition: color 0.35s, background 0.35s;
-    }
-
-    /* ══════════════════════════════
-       TITLE
-    ══════════════════════════════ */
-    .ab-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.2rem, 6vw, 3.8rem);
+    .about-section h1 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
       font-weight: 700;
-      color: var(--text-heading);
-      line-height: 1.1;
-      position: relative;
-      display: inline-block;
-      transition: color 0.35s;
+      color: #ffffff;
+      margin-bottom: 28px;
     }
 
-    .underline-accent {
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-light), transparent);
-      border-radius: 2px;
-      transition: background 0.35s;
-    }
-
-    /* ══════════════════════════════
-       DIVIDER
-    ══════════════════════════════ */
-    .ab-divider {
-      width: 48px;
-      height: 2px;
-      background: var(--accent-mid);
-      border-radius: 2px;
-      margin: 1.4rem 0 1rem;
-      opacity: 0.6;
-      transition: background 0.35s;
-    }
-
-    /* ══════════════════════════════
-       SUBTITLE
-    ══════════════════════════════ */
-    .ab-subtitle {
-      font-size: 1rem;
-      color: var(--text-body);
-      font-weight: 300;
-      max-width: 460px;
-      line-height: 1.7;
-      transition: color 0.35s;
-    }
-
-    /* ══════════════════════════════
-       META PILLS
-    ══════════════════════════════ */
-    .ab-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 1.8rem;
-    }
-
-    .ab-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 400;
-      color: var(--text-pill);
-      background: var(--bg-pill);
-      border: 1px solid var(--border-pill);
-      border-radius: 20px;
-      padding: 6px 16px;
-      transition: color 0.35s, background 0.35s, border-color 0.35s;
-    }
-
-    .ab-pill strong {
+    .about-section p {
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
       font-weight: 500;
-      color: var(--text-pill);
-    }
-
-    .ab-pill .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-mid);
-      flex-shrink: 0;
-      transition: background 0.35s;
+      color: #ffffff;
+      margin-bottom: 14px;
+      line-height: 1.6;
     }
 
     /* ══════════════════════════════
@@ -370,48 +261,11 @@
     <div class="ab-deco"></div>
     <div class="ab-deco-2"></div>
 
-    <!-- Top row -->
-    <div class="ab-toprow">
-      <a class="ab-back" href="/">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
-             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 12L6 8l4-4"/>
-        </svg>
-        Back to Home
-      </a>
-    </div>
-
-    <!-- Badge -->
-    <div>
-      <span class="ab-badge">B.Tech CSE &middot; GEC Dumka</span>
-    </div>
-
-    <!-- Title -->
-    <h1 class="ab-title">
-      About Us
-      <div class="underline-accent"></div>
-    </h1>
-
-    <!-- Divider -->
-    <div class="ab-divider"></div>
-
-    <!-- Subtitle -->
-    <p class="ab-subtitle">
-     <h1>Computer Science &amp; Engineering students</h1> 
-     <h2>Government Engineering College, Dumka</h2> 
-
-    </p>
-
-    <!-- Meta pills -->
-    <div class="ab-meta">
-      <div class="ab-pill">
-        <span class="dot"></span>
-        Subject: <strong>CSE2026</strong>
-      </div>
-      <div class="ab-pill">
-        <span class="dot"></span>
-        Project Name: <strong>DiseasePredict</strong>
-      </div>
+    <div class="about-section">
+      <h1>About Us</h1>
+      <p>B.Tech CSE Student of Government Engineering College, Dumka</p>
+      <p>Subject-CSE2026</p>
+      <p>Project Name-DiseasePredict</p>
     </div>
 
     <!-- Team Grid -->
