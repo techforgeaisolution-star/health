@@ -89,11 +89,6 @@ nav {
   border: none;
 }
 
-/* Hide menu button on desktop */
-.menu-toggle {
-  display: none;
-}
-
 .nav-links a {
   color: var(--text2);
   text-decoration: none;
@@ -105,9 +100,10 @@ nav {
   letter-spacing: 0.01em;
 }
 
-.nav-toggle {
+/* Hide menu button on desktop */
+.nav-toggle, .menu-toggle {
   display: none;
-  flex-direction: row;
+  flex-direction: column;
   gap: 5px;
   background: none;
   border: none;
@@ -786,16 +782,13 @@ footer {
   .form-grid  { grid-template-columns: 1fr; }
   .stats-row  { grid-template-columns: 1fr; }
   
-  /* 📱 Mobile Styles */
-  .menu-toggle {
-    display: block;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    cursor: pointer;
+  nav {
+    padding: 0 1.5rem;
+    justify-content: space-between;
   }
 
-  .nav-toggle { display: flex; }
+  /* 📱 Mobile Styles */
+  .nav-toggle, .menu-toggle { display: flex; }
   
   .nav-links {
     position: fixed;
@@ -806,7 +799,7 @@ footer {
     background: var(--surface);
     display: flex;
     flex-direction: column; /* better for mobile */
-    align-items: flex-start;
+    align-items: flex-start; /* flex alignment near toggle */
     padding: 2rem;
     gap: 1rem;
     transform: translateX(100%); /* hidden */
@@ -826,12 +819,8 @@ footer {
     border-bottom: 1px solid var(--surface2);
     border-radius: 0;
   }
-
   .hero h1    { font-size: 2.4rem; }
   .result-actions { flex-direction: column; }
-  nav { 
-    padding: 0 1.5rem; 
-  }
   .nav-logo { font-size: 1rem; }
   .nav-logo-icon { width: 30px; height: 30px; }
 }
