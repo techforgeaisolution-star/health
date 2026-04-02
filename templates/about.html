@@ -271,6 +271,36 @@
   </style>
 </head>
 <body>
+  <nav>
+    <a class="nav-logo" href="/">
+      <span class="nav-logo-icon">
+        <img src="{{ url_for('static', filename='images.png') }}" alt="Logo" />
+      </span>
+      DiseasePredict
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/diabetes">Diabetes</a></li>
+      <li><a href="/heartdisease/">Heart Disease</a></li>
+      <li><a href="/parkinsons/">Parkinson's</a></li>
+      <li><a href="/about" class="active">About</a></li>
+    </ul>
+  </nav>
+  <!-- blur overlay -->
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- right side panel -->
+  <aside class="nav-side-panel" id="navPanel">
+    <a href="/">Home</a>
+    <a href="/diabetes">Diabetes</a>
+    <a href="/heartdisease">Heart Disease</a>
+    <a href="/parkinsons">Parkinson's</a>
+    <a href="/about" class="active">About</a>
+  </aside>
 
   <div class="ab-wrap">
 
@@ -360,13 +390,27 @@
   </div>
 
   <script>
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
+    const navToggle = document.getElementById("navToggle");
+    const navPanel = document.getElementById("navPanel");
+    const navOverlay = document.getElementById("navOverlay");
 
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
+    function openNav() {
+      navToggle.classList.add("active");
+      navPanel.classList.add("active");
+      navOverlay.classList.add("active");
+    }
+
+    function closeNav() {
+      navToggle.classList.remove("active");
+      navPanel.classList.remove("active");
+      navOverlay.classList.remove("active");
+    }
+
+    navToggle.addEventListener("click", () =>
+      navPanel.classList.contains("active") ? closeNav() : openNav()
+    );
+
+    navOverlay.addEventListener("click", closeNav);
   </script>
 </body>
 </html>

@@ -33,7 +33,7 @@
         <span></span>
         <span></span>
       </button>
-      <ul class="nav-links" id="navLinks" id="navOverlay">
+      <ul class="nav-links" id="navLinks">
         <li><a href="/diabetes">Diabetes</a></li>
         <li><a href="/heartdisease/">Heart Disease</a></li>
         <li><a href="/parkinsons/">Parkinson's</a></li>
@@ -45,8 +45,8 @@
 
     <!-- right side panel -->
     <aside class="nav-side-panel" id="navPanel">
-      <a href="/" class="active">Home</a>
-      <a href="/diabetes">Diabetes</a>
+      <a href="/">Home</a>
+      <a href="/diabetes" class="active">Diabetes</a>
       <a href="/heartdisease">Heart Disease</a>
       <a href="/parkinsons">Parkinson's</a>
       <a href="/about">About</a>
@@ -169,12 +169,26 @@
         });
 
       const navToggle = document.getElementById("navToggle");
-      const navLinks = document.getElementById("navLinks");
+      const navPanel = document.getElementById("navPanel");
+      const navOverlay = document.getElementById("navOverlay");
 
-      navToggle.addEventListener("click", () => {
-        navToggle.classList.toggle("active");
-        navLinks.classList.toggle("active");
-      });
+      function openNav() {
+        navToggle.classList.add("active");
+        navPanel.classList.add("active");
+        navOverlay.classList.add("active");
+      }
+
+      function closeNav() {
+        navToggle.classList.remove("active");
+        navPanel.classList.remove("active");
+        navOverlay.classList.remove("active");
+      }
+
+      navToggle.addEventListener("click", () =>
+        navPanel.classList.contains("active") ? closeNav() : openNav()
+      );
+
+      navOverlay.addEventListener("click", closeNav);
     </script>
   </body>
 </html>
