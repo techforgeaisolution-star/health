@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Us – DiseasePredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <style>
 
     /* ══════════════════════════════
-       THEME TOKENS
+       ABOUT PAGE THEME TOKENS
     ══════════════════════════════ */
     :root {
       --bg-page:        #f0faf4;
@@ -45,10 +46,10 @@
       background: var(--bg-page);
       min-height: 100vh;
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      padding: 2.5rem 1rem;
-      transition: background 0.35s ease;
+      padding: 90px 1rem 3rem;
     }
 
     /* ══════════════════════════════
@@ -358,5 +359,14 @@
 
   </div>
 
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>

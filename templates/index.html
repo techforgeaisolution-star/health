@@ -1,104 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DiseasePredict — AI Disease Prediction</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DiseasePredict — AI Disease Prediction</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <a class="nav-logo" href="/">
+        <span class="nav-logo-icon">
+          <img
+            src="{{ url_for('static', filename='images.png') }}"
+            alt="Logo"
+          />
+        </span>
+        DiseasePredict
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks" id="navOverlay">
+        <li><a href="/diabetes">Diabetes</a></li>
+        <li><a href="/heartdisease/">Heart Disease</a></li>
+        <li><a href="/parkinsons/">Parkinson's</a></li>
+        <li><a href="/about">parkinsons</a></li>
+      </ul>
+    </nav>
+    <!-- blur overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
 
-<nav>
-  <a class="nav-logo" href="/">
-    <span class="nav-logo-icon">
-      <img src="{{ url_for('static', filename='images.png') }}" alt="Logo">
-    </span>
-    DiseasePredict
-  </a>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="/diabetes">Diabetes</a></li>
-    <li><a href="/heartdisease/">Heart Disease</a></li>
-    <li><a href="/parkinsons/">Parkinson's</a></li>
-    <li><a href="/about">About</a></li>
-  </ul>
-</nav>
+    <!-- right side panel -->
+    <aside class="nav-side-panel" id="navPanel">
+      <a href="/" class="active">Home</a>
+      <a href="/diabetes">Diabetes</a>
+      <a href="/heartdisease">Heart Disease</a>
+      <a href="/parkinsons">Parkinson's</a>
+      <a href="/about">About</a>
+    </aside>
 
-<section class="hero">
-  <div class="hero-badge">
-    <span>⚡</span> AI-Powered Predictions
-  </div>
+    <section class="hero">
+      <div class="hero-badge"><span>⚡</span> AI-Powered Predictions</div>
 
-  <h1>
-    Predict Disease<br/>
-    <span>Before It Finds You</span>
-  </h1>
+      <h1>
+        Predict Disease<br />
+        <span>Before It Finds You</span>
+      </h1>
 
-  <p>
-    Enter your clinical parameters and let our trained machine learning
-    models assess your risk for three major diseases — instantly.
-  </p>
+      <p>
+        Enter your clinical parameters and let our trained machine learning
+        models assess your risk for three major diseases — instantly.
+      </p>
 
-  <div class="cards-grid">
-    <a class="disease-card" href="/diabetes">
-      <div class="card-icon blue">🩸</div>
-      <h3>Diabetes</h3>
-      <p>Assess diabetes risk using glucose levels, BMI, insulin response, and more.</p>
-      <span class="card-arrow">Run Prediction →</span>
-    </a>
+      <div class="cards-grid">
+        <a class="disease-card" href="/diabetes">
+          <div class="card-icon blue">🩸</div>
+          <h3>Diabetes</h3>
+          <p>
+            Assess diabetes risk using glucose levels, BMI, insulin response,
+            and more.
+          </p>
+          <span class="card-arrow">Run Prediction →</span>
+        </a>
 
-    <a class="disease-card" href="/heartdisease/">
-      <div class="card-icon purple">
-        <i class="fa-solid fa-heart-pulse"></i>
+        <a class="disease-card" href="/heartdisease/">
+          <div class="card-icon purple">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+
+          <h3>Heart Disease</h3>
+          <p>
+            Evaluate cardiac risk from cholesterol, blood pressure, ECG results,
+            and age.
+          </p>
+          <span class="card-arrow">Run Prediction →</span>
+        </a>
+
+        <a class="disease-card" href="/parkinsons/">
+          <div class="card-icon teal">🧠</div>
+          <h3>Parkinson's</h3>
+          <p>
+            Detect Parkinson's from voice-based biomarkers including jitter and
+            shimmer.
+          </p>
+          <span class="card-arrow">Run Prediction →</span>
+        </a>
       </div>
 
-      <h3>Heart Disease</h3>
-      <p>Evaluate cardiac risk from cholesterol, blood pressure, ECG results, and age.</p>
-      <span class="card-arrow">Run Prediction →</span>
-    </a>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num">97%</div>
+          <div class="stat-label">Model Accuracy</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Diseases Covered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">&lt;1s</div>
+          <div class="stat-label">Prediction Speed</div>
+        </div>
+      </div>
+    </section>
 
-    <a class="disease-card" href="/parkinsons/">
-      <div class="card-icon teal">🧠</div>
-      <h3>Parkinson's</h3>
-      <p>Detect Parkinson's from voice-based biomarkers including jitter and shimmer.</p>
-      <span class="card-arrow">Run Prediction →</span>
-    </a>
-  </div>
+    <footer>
+      <p>
+        ⚠️ For educational purposes only. Not a substitute for professional
+        medical advice.
+      </p>
+    </footer>
 
-  <div class="stats-row">
-    <div class="stat">
-      <div class="stat-num">97%</div>
-      <div class="stat-label">Model Accuracy</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Diseases Covered</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">&lt;1s</div>
-      <div class="stat-label">Prediction Speed</div>
-    </div>
-  </div>
-</section>
+    <script>
+      const navToggle = document.getElementById("navToggle");
+      const navPanel = document.getElementById("navPanel");
+      const navOverlay = document.getElementById("navOverlay");
 
-<footer>
-  <p>⚠️ For educational purposes only. Not a substitute for professional medical advice.</p>
-</footer>
+      function openNav() {
+        navToggle.classList.add("active");
+        navPanel.classList.add("active");
+        navOverlay.classList.add("active");
+      }
 
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
+      function closeNav() {
+        navToggle.classList.remove("active");
+        navPanel.classList.remove("active");
+        navOverlay.classList.remove("active");
+      }
 
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
-  });
-</script>
+      navToggle.addEventListener("click", () =>
+        navPanel.classList.contains("active") ? closeNav() : openNav()
+      );
 
-</body>
+      navOverlay.addEventListener("click", closeNav);
+    </script>
+  </body>
 </html>

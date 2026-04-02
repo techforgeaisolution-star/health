@@ -1,146 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Diabetes Prediction — DiseasePredict</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diabetes Prediction — DiseasePredict</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <a class="nav-logo" href="/">
+        <span class="nav-logo-icon">
+          <img
+            src="{{ url_for('static', filename='images.png') }}"
+            alt="Logo"
+          />
+        </span>
+        DiseasePredict
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/diabetes" class="active">Diabetes</a></li>
+        <li><a href="/heartdisease/">Heart Disease</a></li>
+        <li><a href="/parkinsons/">Parkinson's</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+      <!-- right side panel -->
+      <aside class="nav-side-panel" id="navPanel">
+        <a href="/" class="active">Home</a>
+        <a href="/diabetes">Diabetes</a>
+        <a href="/heartdisease">Heart Disease</a>
+        <a href="/parkinsons">Parkinson's</a>
+        <a href="/about">About</a>
+      </aside>
+    </nav>
 
-<nav>
-  <a class="nav-logo" href="/">
-    <span class="nav-logo-icon">
-      <img src="{{ url_for('static', filename='images.png') }}" alt="Logo">
-    </span>
-    DiseasePredict
-  </a>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="/diabetes" class="active">Diabetes</a></li>
-    <li><a href="/heartdisease/">Heart Disease</a></li>
-    <li><a href="/parkinsons/">Parkinson's</a></li>
-    <li><a href="/about">About</a></li>
-  </ul>
-</nav>
-
-<div class="page-wrapper">
-  <div class="form-header">
-    <a class="back-link" href="/">← Back to Home</a>
-    <h1>🩸 Diabetes Prediction</h1>
-    <p>Enter your clinical parameters below to assess diabetes risk</p>
-  </div>
-
-  <div class="form-container">
-    <form action="{{ url_for('predictdiabetes') }}" method="post" id="mainForm">
-      <div class="form-grid">
-
-        <div class="field-group">
-          <label>Pregnancies</label>
-          <div class="input-wrap">
-            <input type="number" step="1" min="0" max="17" name="field1" placeholder="e.g. 2" required/>
-            <span class="range-tag">0 – 17</span>
-          </div>
-          <span class="field-hint">Number of times pregnant</span>
-          <span class="field-error">Enter a value between 0 and 17</span>
-        </div>
-
-        <div class="field-group">
-          <label>Glucose (mg/dL)</label>
-          <div class="input-wrap">
-            <input type="number" step="1" min="0" max="199" name="field2" placeholder="e.g. 120" required/>
-            <span class="range-tag">0 – 199</span>
-          </div>
-          <span class="field-hint">Plasma glucose concentration (2-hr oral test)</span>
-          <span class="field-error">Enter a value between 0 and 199</span>
-        </div>
-
-        <div class="field-group">
-          <label>Blood Pressure (mmHg)</label>
-          <div class="input-wrap">
-            <input type="number" step="1" min="0" max="122" name="field3" placeholder="e.g. 72" required/>
-            <span class="range-tag">0 – 122</span>
-          </div>
-          <span class="field-hint">Diastolic blood pressure</span>
-          <span class="field-error">Enter a value between 0 and 122</span>
-        </div>
-
-        <div class="field-group">
-          <label>Skin Thickness (mm)</label>
-          <div class="input-wrap">
-            <input type="number" step="1" min="0" max="99" name="field4" placeholder="e.g. 20" required/>
-            <span class="range-tag">0 – 99</span>
-          </div>
-          <span class="field-hint">Triceps skinfold thickness</span>
-          <span class="field-error">Enter a value between 0 and 99</span>
-        </div>
-
-        <div class="field-group">
-          <label>Insulin (μU/mL)</label>
-          <div class="input-wrap">
-            <input type="number" step="1" min="0" max="846" name="field5" placeholder="e.g. 80" required/>
-            <span class="range-tag">0 – 846</span>
-          </div>
-          <span class="field-hint">2-Hour serum insulin</span>
-          <span class="field-error">Enter a value between 0 and 846</span>
-        </div>
-
-        <div class="field-group">
-          <label>BMI (kg/m²)</label>
-          <div class="input-wrap">
-            <input type="number" step="0.1" min="0" max="67.1" name="field6" placeholder="e.g. 28.5" required/>
-            <span class="range-tag">0 – 67.1</span>
-          </div>
-          <span class="field-hint">Body mass index (weight / height²)</span>
-          <span class="field-error">Enter a value between 0 and 67.1</span>
-        </div>
-
-        <div class="field-group">
-          <label>Diabetes Pedigree Function</label>
-          <div class="input-wrap">
-            <input type="number" step="0.001" min="0.078" max="2.420" name="field7" placeholder="e.g. 0.500" required/>
-            <span class="range-tag">0.078 – 2.420</span>
-          </div>
-          <span class="field-hint">Genetic diabetes likelihood score</span>
-          <span class="field-error">Enter a value between 0.078 and 2.420</span>
-        </div>
-
-        <div class="field-group">
-          <label>Age (years)</label>
-          <div class="input-wrap">
-            <input type="number" step="1" min="1" max="120" name="field8" placeholder="e.g. 35" required/>
-            <span class="range-tag">1 – 120</span>
-          </div>
-          <span class="field-hint">Patient age in years</span>
-          <span class="field-error">Enter a value between 1 and 120</span>
-        </div>
-
+    <div class="page-wrapper">
+      <div class="form-header">
+        <a class="back-link" href="/">← Back to Home</a>
+        <h1>🩸 Diabetes Prediction</h1>
+        <p>Enter your clinical parameters below to assess diabetes risk</p>
       </div>
 
-      <div class="submit-row">
-        <button type="submit" class="btn-predict">Analyze &amp; Predict</button>
-      </div>
-    </form>
+      <div class="form-container">
+        <form
+          action="{{ url_for('predictdiabetes') }}"
+          method="post"
+          id="mainForm"
+        >
+          <div class="form-grid">
+            <div class="field-group">
+              <label>Pregnancies</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="1"
+                  min="0"
+                  max="17"
+                  name="field1"
+                  placeholder="e.g. 2"
+                  required
+                />
+                <span class="range-tag">0 – 17</span>
+              </div>
+              <span class="field-hint">Number of times pregnant</span>
+              <span class="field-error">Enter a value between 0 and 17</span>
+            </div>
 
-    <div class="disclaimer">
-      ⚠️ This tool is for educational purposes only and should not replace professional medical diagnosis.
+            <div class="field-group">
+              <label>Glucose (mg/dL)</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="1"
+                  min="0"
+                  max="199"
+                  name="field2"
+                  placeholder="e.g. 120"
+                  required
+                />
+                <span class="range-tag">0 – 199</span>
+              </div>
+              <span class="field-hint"
+                >Plasma glucose concentration (2-hr oral test)</span
+              >
+              <span class="field-error">Enter a value between 0 and 199</span>
+            </div>
+
+            <div class="field-group">
+              <label>Blood Pressure (mmHg)</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="1"
+                  min="0"
+                  max="122"
+                  name="field3"
+                  placeholder="e.g. 72"
+                  required
+                />
+                <span class="range-tag">0 – 122</span>
+              </div>
+              <span class="field-hint">Diastolic blood pressure</span>
+              <span class="field-error">Enter a value between 0 and 122</span>
+            </div>
+
+            <div class="field-group">
+              <label>Skin Thickness (mm)</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="1"
+                  min="0"
+                  max="99"
+                  name="field4"
+                  placeholder="e.g. 20"
+                  required
+                />
+                <span class="range-tag">0 – 99</span>
+              </div>
+              <span class="field-hint">Triceps skinfold thickness</span>
+              <span class="field-error">Enter a value between 0 and 99</span>
+            </div>
+
+            <div class="field-group">
+              <label>Insulin (μU/mL)</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="1"
+                  min="0"
+                  max="846"
+                  name="field5"
+                  placeholder="e.g. 80"
+                  required
+                />
+                <span class="range-tag">0 – 846</span>
+              </div>
+              <span class="field-hint">2-Hour serum insulin</span>
+              <span class="field-error">Enter a value between 0 and 846</span>
+            </div>
+
+            <div class="field-group">
+              <label>BMI (kg/m²)</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  max="67.1"
+                  name="field6"
+                  placeholder="e.g. 28.5"
+                  required
+                />
+                <span class="range-tag">0 – 67.1</span>
+              </div>
+              <span class="field-hint">Body mass index (weight / height²)</span>
+              <span class="field-error">Enter a value between 0 and 67.1</span>
+            </div>
+
+            <div class="field-group">
+              <label>Diabetes Pedigree Function</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="0.001"
+                  min="0.078"
+                  max="2.420"
+                  name="field7"
+                  placeholder="e.g. 0.500"
+                  required
+                />
+                <span class="range-tag">0.078 – 2.420</span>
+              </div>
+              <span class="field-hint">Genetic diabetes likelihood score</span>
+              <span class="field-error"
+                >Enter a value between 0.078 and 2.420</span
+              >
+            </div>
+
+            <div class="field-group">
+              <label>Age (years)</label>
+              <div class="input-wrap">
+                <input
+                  type="number"
+                  step="1"
+                  min="1"
+                  max="120"
+                  name="field8"
+                  placeholder="e.g. 35"
+                  required
+                />
+                <span class="range-tag">1 – 120</span>
+              </div>
+              <span class="field-hint">Patient age in years</span>
+              <span class="field-error">Enter a value between 1 and 120</span>
+            </div>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn-predict">
+              Analyze &amp; Predict
+            </button>
+          </div>
+        </form>
+
+        <div class="disclaimer">
+          ⚠️ This tool is for educational purposes only and should not replace
+          professional medical diagnosis.
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<script src="{{ url_for('static', filename='js/validate.js') }}"></script>
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
+    <script src="{{ url_for('static', filename='js/validate.js') }}"></script>
+    <script>
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
 
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
-  });
-</script>
-</body>
+      navToggle.addEventListener("click", () => {
+        navToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+    </script>
+  </body>
 </html>
