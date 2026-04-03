@@ -4,42 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DiseasePredict — AI Disease Prediction</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/main.css') }}"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
   </head>
   <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- NAV -->
     <nav>
       <a class="nav-logo" href="/">
-        <span class="nav-logo-icon">
+        <div class="nav-logo-box">
           <img
-            src="{{ url_for('static', filename='images.png') }}"
+            src="{{ url_for('static', filename='css/images.png') }}"
             alt="Logo"
+            onerror="this.parentElement.textContent='🩺'"
           />
-        </span>
+        </div>
         DiseasePredict
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links" id="navLinks">
+      <ul class="nav-links">
         <li><a href="/diabetes">Diabetes</a></li>
         <li><a href="/heartdisease/">Heart Disease</a></li>
         <li><a href="/parkinsons/">Parkinson's</a></li>
         <li><a href="/about">About</a></li>
+        <li><a href="/diabetes" class="nav-cta">Get Started</a></li>
       </ul>
     </nav>
-    <!-- blur overlay -->
     <div class="nav-overlay" id="navOverlay"></div>
-
-    <!-- right side panel -->
     <aside class="nav-side-panel" id="navPanel">
       <a href="/" class="active">Home</a>
       <a href="/diabetes">Diabetes</a>
@@ -48,99 +49,177 @@
       <a href="/about">About</a>
     </aside>
 
+    <!-- HERO -->
     <section class="hero">
-      <div class="hero-badge"><span>⚡</span> AI-Powered Predictions</div>
-
-      <h1>
-        Predict Disease<br />
-        <span>Before It Finds You</span>
-      </h1>
-
+      <div class="hero-badge">
+        <span>⚡</span> AI-Powered disease Predictions
+      </div>
+      <h1>Predict Disease<br /><em>Before It effect you</em></h1>
       <p>
-        Enter your clinical parameters and let our trained machine learning
-        models assess your risk for three major diseases — instantly.
+        Enter your clinical parameters and our trained ML models assess your
+        risk for three major conditions — instantly, privately, and for free.
       </p>
 
       <div class="cards-grid">
-        <a class="disease-card" href="/diabetes">
-          <div class="card-icon blue">🩸</div>
+        <a class="disease-card blue-card" href="/diabetes">
+          <div class="card-bar"></div>
+          <div class="card-icon bl">🩸</div>
           <h3>Diabetes</h3>
           <p>
             Assess diabetes risk using glucose levels, BMI, insulin response,
-            and more.
+            and family history markers.
           </p>
-          <span class="card-arrow">Run Prediction →</span>
+          <span class="card-cta"
+            >Run Prediction
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.72rem"></i>
+          </span>
         </a>
-
-        <a class="disease-card" href="/heartdisease/">
-          <div class="card-icon purple">
+        <a class="disease-card rose-card" href="/heartdisease/">
+          <div class="card-bar"></div>
+          <div class="card-icon ro">
             <i class="fa-solid fa-heart-pulse"></i>
           </div>
-
           <h3>Heart Disease</h3>
           <p>
             Evaluate cardiac risk from cholesterol, blood pressure, ECG results,
-            and age.
+            and patient age.
           </p>
-          <span class="card-arrow">Run Prediction →</span>
+          <span class="card-cta"
+            >Run Prediction
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.72rem"></i>
+          </span>
         </a>
-
-        <a class="disease-card" href="/parkinsons/">
-          <div class="card-icon teal">🧠</div>
+        <a class="disease-card teal-card" href="/parkinsons/">
+          <div class="card-bar"></div>
+          <div class="card-icon te">🧠</div>
           <h3>Parkinson's</h3>
           <p>
-            Detect Parkinson's from voice-based biomarkers including jitter and
-            shimmer.
+            Detect Parkinson's from voice-based biomarkers including jitter,
+            shimmer, and harmonic ratios.
           </p>
-          <span class="card-arrow">Run Prediction →</span>
+          <span class="card-cta"
+            >Run Prediction
+            <i class="fa-solid fa-arrow-right" style="font-size: 0.72rem"></i>
+          </span>
         </a>
       </div>
 
       <div class="stats-row">
         <div class="stat">
           <div class="stat-num">97%</div>
-          <div class="stat-label">Model Accuracy</div>
+          <div class="stat-label">Accuracy</div>
         </div>
         <div class="stat">
           <div class="stat-num">3</div>
-          <div class="stat-label">Diseases Covered</div>
+          <div class="stat-label">Diseases</div>
         </div>
         <div class="stat">
-          <div class="stat-num">&lt;1s</div>
-          <div class="stat-label">Prediction Speed</div>
+          <div class="stat-num"><1s</div>
+          <div class="stat-label">Prediction</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Data Stored</div>
         </div>
       </div>
     </section>
 
-    <footer>
-      <p>
-        ⚠️ For educational purposes only. Not a substitute for professional
-        medical advice.
-      </p>
-    </footer>
+    <!-- HOW IT WORKS -->
+    <section class="section alt-bg reveal">
+      <div class="sec-inner">
+        <div class="sec-head">
+          <span class="sec-label">How It Works</span>
+          <h2 class="sec-title">Four Steps to Your Result</h2>
+          <p class="sec-sub">
+            No sign-ups, no delays, no complexity — just fast and private
+            predictions.
+          </p>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div
+              class="step-icon"
+              style="background: var(--blue-light); color: var(--blue)"
+            >
+              <i class="fa-solid fa-list-check"></i>
+            </div>
+            <h4>Choose a Disease</h4>
+            <p>
+              Select from Diabetes, Heart Disease, or Parkinson's on the main
+              screen.
+            </p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-icon" style="background: #f5f3ff; color: #7c3aed">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+            <h4>Enter Parameters</h4>
+            <p>
+              Fill in your clinical values — glucose, cholesterol, voice
+              measurements, and more.
+            </p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div
+              class="step-icon"
+              style="background: var(--teal-light); color: var(--teal)"
+            >
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <h4>ML Inference</h4>
+            <p>
+              Our trained model processes inputs using patterns from validated
+              clinical datasets.
+            </p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <div
+              class="step-icon"
+              style="background: var(--amber-light); color: var(--amber)"
+            >
+              <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <h4>View Your Result</h4>
+            <p>
+              Get an instant prediction with a confidence score and doctor
+              follow-up guidance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script>
-      const navToggle = document.getElementById("navToggle");
-      const navPanel = document.getElementById("navPanel");
-      const navOverlay = document.getElementById("navOverlay");
-
-      function openNav() {
-        navToggle.classList.add("active");
-        navPanel.classList.add("active");
-        navOverlay.classList.add("active");
-      }
-
-      function closeNav() {
-        navToggle.classList.remove("active");
-        navPanel.classList.remove("active");
-        navOverlay.classList.remove("active");
-      }
-
-      navToggle.addEventListener("click", () =>
-        navPanel.classList.contains("active") ? closeNav() : openNav()
-      );
-
-      navOverlay.addEventListener("click", closeNav);
-    </script>
-  </body>
-</html>
+    <!-- SERVICES -->
+    <section class="section reveal">
+      <div class="sec-inner">
+        <div class="sec-head">
+          <span class="sec-label">Our Services</span>
+          <h2 class="sec-title">What Each Model Covers</h2>
+          <p class="sec-sub">
+            Each prediction engine is purpose-built on a different clinical
+            dataset with unique biomarkers.
+          </p>
+        </div>
+        <div class="services-grid">
+          <div class="srv-panel bl-p">
+            <div class="srv-head">
+              <div class="srv-icon">🩸</div>
+              <div class="srv-head-text">
+                <h3>Diabetes Risk</h3>
+                <span class="srv-tag">Pima Dataset</span>
+              </div>
+            </div>
+            <p>
+              Analyzes metabolic and hormonal markers to estimate your risk of
+              type-2 diabetes using validated real-world data.
+            </p>
+            <div class="srv-inputs">
+              <div class="inp-item">
+                <div class="inp-dot"></div>
+                Blood Glucose Level
+              </div>
+              <div class="inp-item">
