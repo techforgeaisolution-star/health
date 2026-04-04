@@ -9,15 +9,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
 
 <nav>
       <a class="nav-logo" href="/">
-        <span class="nav-logo-icon">
+        <div class="nav-logo-box">
           <img
             src="{{ url_for('static', filename='images.png') }}"
             alt="Logo"
+            onerror="this.parentElement.textContent='🩺'"
           />
-        </span>
+        </div>
         DiseasePredict
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -30,6 +34,7 @@
         <li><a href="/heartdisease/">Heart Disease</a></li>
         <li><a href="/parkinsons/">Parkinson's</a></li>
         <li><a href="/about">About</a></li>
+        <li><a href="/diabetes" class="nav-cta">Get Started</a></li>
       </ul>
     </nav>
     <!-- blur overlay -->
