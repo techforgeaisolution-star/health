@@ -5,277 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Us – DiseasePredict</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <style>
-
-    /* ══════════════════════════════
-       ABOUT PAGE THEME TOKENS
-    ══════════════════════════════ */
-    :root {
-      --bg-page:        #f0faf4;
-      --bg-card:        #ffffff;
-      --bg-badge:       #d8f3dc;
-      --bg-pill:        #f0faf4;
-      --border-card:    #c8e6d0;
-      --border-pill:    #c8e6d0;
-      --accent:         #2d6a4f;
-      --accent-mid:     #40916c;
-      --accent-light:   #52b788;
-      --text-heading:   #0d1f17;
-      --text-body:      #3a5a47;
-      --text-muted:     #5a7a6a;
-      --text-badge:     #1b4332;
-      --text-pill:      #1b4332;
-      --deco-color:     #d8f3dc;
-      --toggle-bg:      #d8f3dc;
-      --toggle-knob:    #2d6a4f;
-    }
-
-    /* ══════════════════════════════
-       RESET & BASE
-    ══════════════════════════════ */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-page);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 90px 1rem 3rem;
-    }
-
-    /* ══════════════════════════════
-       CARD WRAPPER
-    ══════════════════════════════ */
+    body { padding-top: 90px; display: flex; flex-direction: column; align-items: center; }
     .ab-wrap {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 22px;
-      padding: 2.5rem 2.2rem 2.8rem;
-      position: relative;
-      overflow: hidden;
-      max-width: 920px;
-      width: 100%;
-      transition: background 0.35s ease, border-color 0.35s ease;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl);
+      padding: 40px; position: relative; overflow: hidden; max-width: 920px; width: 100%; box-shadow: var(--sh-xl);
     }
-
-    /* ══════════════════════════════
-       DECORATIVE CIRCLES
-    ══════════════════════════════ */
-    .ab-deco {
-      position: absolute;
-      top: -50px;
-      right: -55px;
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      border: 52px solid var(--deco-color);
-      opacity: 0.5;
-      pointer-events: none;
-      transition: border-color 0.35s ease;
-    }
-    .ab-deco-2 {
-      position: absolute;
-      bottom: -60px;
-      left: -40px;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 36px solid var(--deco-color);
-      opacity: 0.25;
-      pointer-events: none;
-      transition: border-color 0.35s ease;
-    }
-
     .about-section {
-      background-color: #C8941A;
-      width: calc(100% + 4.4rem);
-      margin: 0 -2.2rem 2.5rem;
-      padding: 60px 20px;
-      text-align: center;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      width: calc(100% + 80px); margin: -40px -40px 40px; padding: 60px 40px; text-align: center; color: white;
     }
-
-    .about-section h1 {
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 28px;
-    }
-
-    .about-section p {
-      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-      font-weight: 500;
-      color: #ffffff;
-      margin-bottom: 14px;
-      line-height: 1.6;
-    }
-
-    /* ══════════════════════════════
-       TEAM GRID
-    ══════════════════════════════ */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-
-    .team-card {
-      background: var(--bg-page);
-      border: 1px solid var(--border-pill);
-      border-radius: 18px;
-      padding: 1.8rem 1.5rem;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .team-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-    }
-
-    .team-avatar {
-      width: 64px;
-      height: 64px;
-      background: var(--bg-badge);
-      color: var(--text-badge);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      margin: 0 auto 1.2rem;
-      font-size: 1.3rem;
-    }
-
-    .team-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--text-heading);
-      margin-bottom: 0.3rem;
-    }
-
-    .team-role {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent-mid);
-      display: block;
-      margin-bottom: 0.75rem;
-    }
-
-    .team-info {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .team-socials {
-      margin-top: 1.2rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .team-socials a {
-      color: var(--text-muted);
-      font-size: 1.3rem;
-      transition: color 0.2s;
-    }
-
-    .team-socials a:hover {
-      color: var(--accent);
-    }
-
-    .contact-btn {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 0.6rem 1.4rem;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .contact-btn:hover {
-      background: var(--accent-mid);
-      transform: scale(1.05);
-    }
-
-    .ab-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-bottom: 1.2rem;
-      transition: color 0.2s;
-      position: relative;
-      z-index: 10;
-    }
-    .ab-back:hover { color: var(--accent); }
-
-    /* ══════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════ */
-    @media (max-width: 520px) {
-      body { padding: 1.2rem 0.75rem; }
-
-      .ab-wrap {
-        padding: 1.6rem 1.2rem 2rem;
-        border-radius: 16px;
-      }
-
-      .ab-deco {
-        width: 150px;
-        height: 150px;
-        border-width: 34px;
-        top: -30px;
-        right: -30px;
-      }
-
-      .ab-deco-2 {
-        width: 100px;
-        height: 100px;
-        border-width: 22px;
-      }
-
-      .ab-meta {
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .toggle-label { display: none; }
-    }
-
-    @media (max-width: 380px) {
-      .ab-wrap { border-radius: 12px; }
-      body { padding: 0.8rem 0.5rem; }
-    }
-
+    .about-section h1 { font-family: var(--font-display); font-size: 2.6rem; margin-bottom: 20px; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .team-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px; text-align: center; }
+    .team-avatar { width: 64px; height: 64px; background: var(--blue-light); color: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; margin: 0 auto 20px; font-size: 1.3rem; }
+    .team-card h3 { font-family: var(--font-display); color: var(--text); margin-bottom: 5px; }
+    .team-role { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--blue); margin-bottom: 15px; display: block; }
+    .team-info { font-size: 0.88rem; color: var(--muted); }
+    .contact-btn { background: var(--blue); color: white; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: opacity 0.2s; }
+    .contact-btn:hover { opacity: 0.9; }
+    .ab-back { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--blue); text-decoration: none; margin-bottom: 20px; }
   </style>
 </head>
 <body>
+  <div class="blob blob-1"></div>
   <nav>
     <a class="nav-logo" href="/">
-      <span class="nav-logo-icon">
-        <img src="{{ url_for('static', filename='images.png') }}" alt="Logo" />
-      </span>
+      <div class="nav-logo-box">
+        <img src="{{ url_for('static', filename='images.png') }}" alt="Logo" onerror="this.parentElement.textContent='🩺'" />
+      </div>
       DiseasePredict
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">
