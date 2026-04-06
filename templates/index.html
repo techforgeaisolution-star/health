@@ -1,648 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DiseasePredict — AI Disease Prediction</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DiseasePredict — AI Disease Screening</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
 
-    <!-- NAV -->
-    <nav>
-      <a class="nav-logo" href="/">
-        <div class="nav-logo-box">
-          <img
-            src="{{ url_for('static', filename='images.png') }}"
-            alt="Logo"
-            onerror="this.parentElement.textContent='🩺'"
-          />
-        </div>
-        DiseasePredict
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="/diabetes">Diabetes</a></li>
-        <li><a href="/heartdisease/">Heart Disease</a></li>
-        <li><a href="/parkinsons/">Parkinson's</a></li>
-        <li><a href="/diabetes" class="nav-cta">Get Started</a></li>
-      </ul>
-    </nav>
-    <div class="nav-overlay" id="navOverlay"></div>
-    <aside class="nav-side-panel" id="navPanel">
-      <a href="/" class="active">Home</a>
-      <a href="/diabetes">Diabetes</a>
-      <a href="/heartdisease">Heart Disease</a>
-      <a href="/parkinsons">Parkinson's</a>
-    </aside>
+{% include 'partials/nav.html' %}
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-badge">
-        <span>⚡</span> AI-Powered disease Predictions
-      </div>
-      <h1>Predict Disease<br /><em>Before It Harms You</em></h1>
-      <p>
-        Enter your clinical parameters and our trained ML models assess your
-        risk for three major conditions — instantly, privately, and for free.
-      </p>
-
-      <div class="cards-grid">
-        <a class="disease-card blue-card" href="/diabetes">
-          <div class="card-bar"></div>
-          <div class="card-icon bl">🩸</div>
-          <h3>Diabetes</h3>
-          <p>
-            Assess diabetes risk using glucose levels, BMI, insulin response,
-            and family history markers.
-          </p>
-          <span class="card-cta"
-            >Run Prediction
-            <i class="fa-solid fa-arrow-right" style="font-size: 0.72rem"></i
-          ></span>
-        </a>
-        <a class="disease-card rose-card" href="/heartdisease/">
-          <div class="card-bar"></div>
-          <div class="card-icon ro">
-            <i class="fa-solid fa-heart-pulse"></i>
-          </div>
-          <h3>Heart Disease</h3>
-          <p>
-            Evaluate cardiac risk from cholesterol, blood pressure, ECG results,
-            and patient age.
-          </p>
-          <span class="card-cta"
-            >Run Prediction
-            <i class="fa-solid fa-arrow-right" style="font-size: 0.72rem"></i
-          ></span>
-        </a>
-        <a class="disease-card teal-card" href="/parkinsons/">
-          <div class="card-bar"></div>
-          <div class="card-icon te">🧠</div>
-          <h3>Parkinson's</h3>
-          <p>
-            Detect Parkinson's from voice-based biomarkers including jitter,
-            shimmer, and harmonic ratios.
-          </p>
-          <span class="card-cta"
-            >Run Prediction
-            <i class="fa-solid fa-arrow-right" style="font-size: 0.72rem"></i
-          ></span>
-        </a>
-      </div>
-
-      <div class="stats-row">
-        <div class="stat">
-          <div class="stat-num">97%</div>
-          <div class="stat-label">Accuracy</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Diseases</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">&lt;1s</div>
-          <div class="stat-label">Prediction</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">0</div>
-          <div class="stat-label">Data Stored</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="section alt-bg reveal">
-      <div class="sec-inner">
-        <div class="sec-head">
-          <span class="sec-label">How It Works</span>
-          <h2 class="sec-title">Four Steps to Your Result</h2>
-          <p class="sec-sub">
-            No sign-ups, no delays, no complexity — just fast and private
-            predictions.
-          </p>
-        </div>
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-num">01</div>
-            <div
-              class="step-icon"
-              style="background: var(--blue-light); color: var(--blue)"
-            >
-              <i class="fa-solid fa-list-check"></i>
-            </div>
-            <h4>Choose a Disease</h4>
-            <p>
-              Select from Diabetes, Heart Disease, or Parkinson's on the main
-              screen.
-            </p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">02</div>
-            <div class="step-icon" style="background: #f5f3ff; color: #7c3aed">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </div>
-            <h4>Enter Parameters</h4>
-            <p>
-              Fill in your clinical values — glucose, cholesterol, voice
-              measurements, and more.
-            </p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">03</div>
-            <div
-              class="step-icon"
-              style="background: var(--teal-light); color: var(--teal)"
-            >
-              <i class="fa-solid fa-brain"></i>
-            </div>
-            <h4>ML Inference</h4>
-            <p>
-              Our trained model processes inputs using patterns from validated
-              clinical datasets.
-            </p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">04</div>
-            <div
-              class="step-icon"
-              style="background: var(--amber-light); color: var(--amber)"
-            >
-              <i class="fa-solid fa-chart-pie"></i>
-            </div>
-            <h4>View Your Result</h4>
-            <p>
-              Get an instant prediction with a confidence score and doctor
-              follow-up guidance.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="section reveal">
-      <div class="sec-inner">
-        <div class="sec-head">
-          <span class="sec-label">Our Services</span>
-          <h2 class="sec-title">What Each Model Covers</h2>
-          <p class="sec-sub">
-            Each prediction engine is purpose-built on a different clinical
-            dataset with unique biomarkers.
-          </p>
-        </div>
-        <div class="services-grid">
-          <div class="srv-panel bl-p">
-            <div class="srv-head">
-              <div class="srv-icon">🩸</div>
-              <div class="srv-head-text">
-                <h3>Diabetes Risk</h3>
-                <span class="srv-tag">Pima Dataset</span>
-              </div>
-            </div>
-            <p>
-              Analyzes metabolic and hormonal markers to estimate your risk of
-              type-2 diabetes using validated real-world data.
-            </p>
-            <div class="srv-inputs">
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Blood Glucose Level
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                BMI &amp; Body Weight
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Insulin Response
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Age &amp; Pregnancies
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Diabetes Pedigree Function
-              </div>
-            </div>
-            <div class="metric-row">
-              <div class="metric-item">
-                <div class="metric-lr">
-                  <span>Accuracy</span><span>97%</span>
-                </div>
-                <div class="metric-bg">
-                  <div class="metric-fill" style="width: 97%"></div>
-                </div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-lr">
-                  <span>Precision</span><span>94%</span>
-                </div>
-                <div class="metric-bg">
-                  <div class="metric-fill" style="width: 94%"></div>
-                </div>
-              </div>
-            </div>
-            <a href="/diabetes" class="srv-cta"
-              ><i class="fa-solid fa-arrow-right"></i> Start Diabetes Test</a
-            >
-          </div>
-
-          <div class="srv-panel ro-p">
-            <div class="srv-head">
-              <div class="srv-icon">
-                <i
-                  class="fa-solid fa-heart-pulse"
-                  style="font-size: 1.5rem; color: var(--rose)"
-                ></i>
-              </div>
-              <div class="srv-head-text">
-                <h3>Heart Disease</h3>
-                <span class="srv-tag">Cleveland Dataset</span>
-              </div>
-            </div>
-            <p>
-              Evaluates cardiac risk using one of the most validated heart
-              disease datasets in medical ML research worldwide.
-            </p>
-            <div class="srv-inputs">
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Cholesterol Levels
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Resting Blood Pressure
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                ECG / ST-wave Results
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Chest Pain Type
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Max Heart Rate Achieved
-              </div>
-            </div>
-            <div class="metric-row">
-              <div class="metric-item">
-                <div class="metric-lr">
-                  <span>Accuracy</span><span>95%</span>
-                </div>
-                <div class="metric-bg">
-                  <div class="metric-fill" style="width: 95%"></div>
-                </div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-lr"><span>Recall</span><span>92%</span></div>
-                <div class="metric-bg">
-                  <div class="metric-fill" style="width: 92%"></div>
-                </div>
-              </div>
-            </div>
-            <a href="/heartdisease/" class="srv-cta"
-              ><i class="fa-solid fa-arrow-right"></i> Start Heart Test</a
-            >
-          </div>
-
-          <div class="srv-panel te-p">
-            <div class="srv-head">
-              <div class="srv-icon">🧠</div>
-              <div class="srv-head-text">
-                <h3>Parkinson's Detection</h3>
-                <span class="srv-tag">Voice Biomarkers</span>
-              </div>
-            </div>
-            <p>
-              Uses vocal signal processing — a non-invasive approach using
-              sustained phonation recordings and acoustic features.
-            </p>
-            <div class="srv-inputs">
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                MDVP Jitter &amp; Shimmer
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                HNR (Harmonics-to-Noise)
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                RPDE &amp; DFA Measures
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Pitch Period Entropy
-              </div>
-              <div class="inp-item">
-                <div class="inp-dot"></div>
-                Spread1 / Spread2
-              </div>
-            </div>
-            <div class="metric-row">
-              <div class="metric-item">
-                <div class="metric-lr">
-                  <span>Accuracy</span><span>96%</span>
-                </div>
-                <div class="metric-bg">
-                  <div class="metric-fill" style="width: 96%"></div>
-                </div>
-              </div>
-              <div class="metric-item">
-                <div class="metric-lr">
-                  <span>F1 Score</span><span>93%</span>
-                </div>
-                <div class="metric-bg">
-                  <div class="metric-fill" style="width: 93%"></div>
-                </div>
-              </div>
-            </div>
-            <a href="/parkinsons/" class="srv-cta"
-              ><i class="fa-solid fa-arrow-right"></i> Start Parkinson's Test</a
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRUST -->
-    <section
-      class="section alt-bg reveal"
-      style="padding-top: 60px; padding-bottom: 80px"
-    >
-      <div class="sec-inner" style="text-align: center">
-        <div
-          class="sec-head"
-          style="display: flex; flex-direction: column; align-items: center"
-        >
-          <span class="sec-label">Why Trust Us</span>
-          <h2 class="sec-title">Built With Integrity</h2>
-        </div>
-        <div class="trust-grid">
-          <div class="trust-card">
-            <div
-              class="trust-icon"
-              style="background: var(--blue-light); color: var(--blue)"
-            >
-              <i class="fa-solid fa-database"></i>
-            </div>
-            <h4>Real Clinical Data</h4>
-            <p>
-              Models trained on peer-reviewed datasets from the UCI ML
-              Repository — not synthetic or fabricated.
-            </p>
-          </div>
-          <div class="trust-card">
-            <div
-              class="trust-icon"
-              style="background: var(--teal-light); color: var(--teal)"
-            >
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h4>100% Private</h4>
-            <p>
-              Your health data never leaves your session. No accounts, no cloud
-              storage, no tracking whatsoever.
-            </p>
-          </div>
-          <div class="trust-card">
-            <div
-              class="trust-icon"
-              style="background: var(--amber-light); color: var(--amber)"
-            >
-              <i class="fa-solid fa-magnifying-glass-chart"></i>
-            </div>
-            <h4>Explainable AI</h4>
-            <p>
-              Every result comes with a confidence score so you understand
-              exactly what drives the prediction.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="/" class="footer-logo">
-            <div class="footer-logo-sq">🩺</div>
-            DiseasePredict
-          </a>
-          <p>
-            An AI-powered health risk screening tool for Diabetes, Heart
-            Disease, and Parkinson's — built for education and awareness, not
-            clinical diagnosis.
-          </p>
-          <div class="footer-socials">
-            <a href="#" class="soc-btn" aria-label="GitHub"
-              ><i class="fa-brands fa-github"></i
-            ></a>
-            <a href="#" class="soc-btn" aria-label="X / Twitter"
-              ><i class="fa-brands fa-x-twitter"></i
-            ></a>
-            <a href="#" class="soc-btn" aria-label="LinkedIn"
-              ><i class="fa-brands fa-linkedin-in"></i
-            ></a>
-            <a href="#" class="soc-btn" aria-label="Email"
-              ><i class="fa-solid fa-envelope"></i
-            ></a>
-          </div>
-        </div>
-
-        <div class="fc">
-          <h5>Predictions</h5>
-          <ul>
-            <li>
-              <a href="/diabetes"
-                ><i
-                  class="fa-solid fa-droplet link-icon"
-                  style="color: var(--blue)"
-                ></i>
-                Diabetes</a
-              >
-            </li>
-            <li>
-              <a href="/heartdisease/"
-                ><i
-                  class="fa-solid fa-heart-pulse link-icon"
-                  style="color: var(--rose)"
-                ></i>
-                Heart Disease</a
-              >
-            </li>
-            <li>
-              <a href="/parkinsons/"
-                ><i
-                  class="fa-solid fa-brain link-icon"
-                  style="color: var(--teal)"
-                ></i>
-                Parkinson's</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <div class="fc">
-          <h5>Product</h5>
-          <ul>
-            <li><a href="#">How It Works</a></li>
-            <li><a href="#">Model Details</a></li>
-            <li><a href="#">Dataset Sources</a></li>
-          </ul>
-        </div>
-
-        <div class="fc">
-          <h5>Legal</h5>
-          <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-            <li><a href="#">Disclaimer</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <hr class="footer-divider" />
-
-      <div class="footer-bottom">
-        <p>© 2025 DiseasePredict. All rights reserved.</p>
-        <div class="footer-warn">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          For educational use only — not a substitute for medical advice.
-        </div>
-      </div>
-    </footer>
-
-    <!-- CHATBOT -->
-    <button class="chat-fab" id="chatFab" aria-label="Open chat">
-      <i class="fa-solid fa-message"></i>
-    </button>
-
-    <div class="chat-box" id="chatBox">
-      <div class="chat-hd">
-        <div class="chat-hd-l">
-          <div class="chat-av"><i class="fa-solid fa-robot"></i></div>
-          <div>
-            <h3>Predict Assistant</h3>
-            <div class="chat-online">● Online</div>
-          </div>
-        </div>
-        <span class="chat-x" id="chatX">&times;</span>
-      </div>
-      <div class="chat-msgs" id="chatMsgs">
-        <div class="msg bot">
-          Hello! How can I help you with your health prediction today?
-        </div>
-      </div>
-      <form class="chat-form" id="chatForm">
-        <input
-          type="text"
-          id="chatIn"
-          placeholder="Ask about diabetes, heart..."
-          autocomplete="off"
-          required
-        />
-        <button type="submit" class="chat-send">
-          <i class="fa-solid fa-paper-plane"></i>
-        </button>
-      </form>
+<section class="hero hero--home">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span>⚡</span> AI-Powered Health System
     </div>
 
-    <script>
-      // NAV
-      const nt = document.getElementById("navToggle"),
-        np = document.getElementById("navPanel"),
-        no = document.getElementById("navOverlay");
-      const oN = () => {
-        nt.classList.add("active");
-        np.classList.add("active");
-        no.classList.add("active");
-      };
-      const cN = () => {
-        nt.classList.remove("active");
-        np.classList.remove("active");
-        no.classList.remove("active");
-      };
-      nt.addEventListener("click", () =>
-        np.classList.contains("active") ? cN() : oN()
-      );
-      no.addEventListener("click", cN);
+    <h1>
+      Understand Your Health<br/>
+      <span>With Our AI-Powered Health System</span>
+    </h1>
 
-      // REVEAL
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e, i) => {
-            if (e.isIntersecting)
-              setTimeout(() => e.target.classList.add("on"), i * 80);
-          });
-        },
-        { threshold: 0.08 }
-      );
-      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+    <p class="hero-lead">
+      Our AI-powered health system uses advanced machine learning to analyze your health data and provide you with a personalized health report.
+    </p>
 
-      // CHATBOT
-      const fab = document.getElementById("chatFab"),
-        box = document.getElementById("chatBox"),
-        x = document.getElementById("chatX");
-      const msgs = document.getElementById("chatMsgs"),
-        form = document.getElementById("chatForm"),
-        inp = document.getElementById("chatIn");
-      fab.addEventListener("click", () => {
-        box.classList.add("open");
-        fab.style.display = "none";
-      });
-      x.addEventListener("click", () => {
-        box.classList.remove("open");
-        fab.style.display = "flex";
-      });
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const m = inp.value.trim();
-        if (!m) return;
-        add(m, "usr");
-        inp.value = "";
-        setTimeout(() => add(reply(m), "bot"), 600);
-      });
-      function add(t, s) {
-        const d = document.createElement("div");
-        d.className = "msg " + s;
-        d.textContent = t;
-        msgs.appendChild(d);
-        msgs.scrollTop = msgs.scrollHeight;
-      }
-      function reply(q) {
-        q = q.toLowerCase();
-        if (q.includes("diabetes"))
-          return "To predict diabetes we use glucose, BMI & insulin data. Click the Diabetes card!";
-        if (q.includes("heart"))
-          return "Our heart model uses cholesterol, blood pressure & ECG data. Try the Heart Disease section.";
-        if (q.includes("parkinson"))
-          return "Parkinson's is detected via voice biomarkers like jitter & shimmer. See the Parkinson's card!";
-        if (q.includes("accur") || q.includes("reliab"))
-          return "Our models achieve 95–97% accuracy on clinical test sets. Always consult a doctor for diagnosis.";
-        if (q.includes("safe") || q.includes("private") || q.includes("data"))
-          return "Completely private — nothing is stored. Everything runs within your session only.";
-        if (q.includes("free"))
-          return "Yes, DiseasePredict is 100% free to use!";
-        return "I can help with Diabetes, Heart Disease, or Parkinson's predictions. What would you like to know?";
-      }
-    </script>
-  </body>
+    <div class="cards-grid">
+      <a class="disease-card" href="{{ url_for('diabetes') }}">
+        <div class="card-icon blue">🩸</div>
+        <h3>Diabetes</h3>
+        <p>Glucose, BMI, insulin, age, blood pressure, and pedigree — run a quick metabolic risk screen.</p>
+        <span class="card-arrow">Run Prediction →</span>
+      </a>
+
+      <a class="disease-card" href="{{ url_for('heartdisease') }}">
+        <div class="card-icon purple">❤️</div>
+        <h3>Heart Disease</h3>
+        <p>Cholesterol, chest pain pattern, ECG, max heart rate, and exercise ST — cardiac risk at a glance.</p>
+        <span class="card-arrow">Run Prediction →</span>
+      </a>
+
+      <a class="disease-card" href="{{ url_for('parkinsons') }}">
+        <div class="card-icon teal">🧠</div>
+        <h3>Parkinson's</h3>
+        <p>Voice biomarkers (jitter, shimmer, HNR, PPE, and more) — research-style speech screening.</p>
+        <span class="card-arrow">Run Prediction →</span>
+      </a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">97%</div>
+        <div class="stat-label">Model accuracy (train)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Screening tools</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">&lt;1s</div>
+        <div class="stat-label">Typical response</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <header class="section-head">
+      <p class="section-eyebrow">What we offer</p>
+      <h2>Three screening services, one goal</h2>
+      <p class="section-sub">Each tool uses a dedicated machine learning model trained on clinical or voice-derived datasets. Pick the assessment that matches the data you have — none of them replace a doctor.</p>
+    </header>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-num">01</div>
+        <h3>Diabetes risk assessment</h3>
+        <p class="service-lead">Ideal when you have lab-style inputs: pregnancies, glucose, blood pressure, skin thickness, insulin, BMI, diabetes pedigree, and age.</p>
+        <ul class="service-list">
+          <li><strong>What you get:</strong> a positive/negative style prediction plus a visual risk score and factor breakdown.</li>
+          <li><strong>Best for:</strong> learning how metabolic markers relate to model output — educational use only.</li>
+          <li><strong>Output:</strong> lifestyle-oriented precautions and an optional PDF report on the results page.</li>
+        </ul>
+        <a class="service-cta" href="{{ url_for('diabetes') }}">Open diabetes form →</a>
+      </article>
+
+      <article class="service-card">
+        <div class="service-num">02</div>
+        <h3>Heart disease risk assessment</h3>
+        <p class="service-lead">Uses classic cardiac features: age, sex, chest pain type, resting BP, cholesterol, fasting sugar, ECG, max heart rate, angina, ST depression, slope, vessels, and thalassemia flag.</p>
+        <ul class="service-list">
+          <li><strong>What you get:</strong> an instant cardiac-risk style readout with charts for cholesterol, age, heart-rate reserve, and ST change.</li>
+          <li><strong>Best for:</strong> exploring how structured heart-disease datasets map to model scores.</li>
+          <li><strong>Output:</strong> precaution list and downloadable summary for your records (not for diagnosis).</li>
+        </ul>
+        <a class="service-cta" href="{{ url_for('heartdisease') }}">Open heart disease form →</a>
+      </article>
+
+      <article class="service-card">
+        <div class="service-num">03</div>
+        <h3>Parkinson's speech screening</h3>
+        <p class="service-lead">Based on voice measurements (MDVP fundamentals, jitter, shimmer, noise ratios, nonlinear metrics, spread, D2, PPE, and related fields).</p>
+        <ul class="service-list">
+          <li><strong>What you get:</strong> a risk score aligned with published voice biomarker research, with jitter/shimmer/HNR/PPE highlighted.</li>
+          <li><strong>Best for:</strong> demos and coursework around biomedical signal / speech features.</li>
+          <li><strong>Output:</strong> guidance-style precautions and PDF export — always confirm with a neurologist.</li>
+        </ul>
+        <a class="service-cta" href="{{ url_for('parkinsons') }}">Open Parkinson's form →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="section-inner how-inner">
+    <div class="how-copy">
+      <p class="section-eyebrow">How it works</p>
+      <h2>From your numbers to a clear report</h2>
+      <p class="section-sub">No account required. Everything runs in your browser session until you submit the form.</p>
+      <ol class="how-steps">
+        <li><strong>Choose a service</strong> — diabetes, heart, or Parkinson's — based on which measurements you can provide.</li>
+        <li><strong>Enter validated ranges</strong> — fields highlight green or red as you type so outliers are obvious.</li>
+        <li><strong>Review the result</strong> — risk band, gauge, factor bars, and plain-language precautions; download a PDF if you need to share or archive.</li>
+      </ol>
+    </div>
+    <div class="how-panel">
+      <div class="how-panel-card">
+        <span class="how-icon">🔒</span>
+        <h4>Privacy-minded</h4>
+        <p>We do not store your form data on a user profile — each prediction is a one-off request to the server.</p>
+      </div>
+      <div class="how-panel-card">
+        <span class="how-icon">📋</span>
+        <h4>Clinician-ready language</h4>
+        <p>Use outputs to prepare questions for your doctor, not to self-diagnose or change treatment.</p>
+      </div>
+      <div class="how-panel-card">
+        <span class="how-icon">💬</span>
+        <h4>Help chat</h4>
+        <p>Use the teal <strong>Help</strong> button to ask how each tool works, what inputs mean, privacy, and why results are educational only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-cta">
+  <div class="home-cta-inner">
+    <h2>Ready to explore your first assessment?</h2>
+    <p>Start with the condition where you have the most complete measurements.</p>
+    <div class="home-cta-btns">
+      <a class="btn-cta primary" href="{{ url_for('diabetes') }}">Diabetes</a>
+      <a class="btn-cta primary" href="{{ url_for('heartdisease') }}">Heart disease</a>
+      <a class="btn-cta primary" href="{{ url_for('parkinsons') }}">Parkinson's</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p><strong>Educational use only.</strong> DiseasePredict is not a medical device and does not provide diagnosis or treatment. Always follow advice from qualified healthcare professionals.</p>
+</footer>
+
+</body>
 </html>

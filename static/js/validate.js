@@ -37,7 +37,8 @@
     let hasError = false;
     form.querySelectorAll('input[type="number"]').forEach(input => {
       validate(input);
-      if (input.closest('.field-group').classList.contains('is-invalid')) {
+      const g = input.closest('.field-group');
+      if (g && g.classList.contains('is-invalid')) {
         hasError = true;
       }
     });

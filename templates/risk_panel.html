@@ -5,6 +5,10 @@
     <span class="rp-title">Risk Analysis</span>
     <span class="risk-badge risk-badge--{{ risk_color }}">{{ risk_level }} Risk</span>
   </div>
+  <div class="risk-meta">
+    <span>Model: <strong>{{ model_name }}</strong></span>
+    <span>Positive: <strong>{{ prob_positive }}%</strong></span>
+  </div>
 
   <!-- Animated Gauge -->
   <div class="gauge-wrap">
@@ -48,8 +52,27 @@
     {% endfor %}
   </div>
 
-  <!-- Probability Distribution -->
-  <div class="fc-title" style="margin-top:1.5rem;">Probability Distribution</div>
+  <!-- Positive vs Negative probability -->
+  <div class="fc-title" style="margin-top:1.3rem;">Class Probability</div>
+  <div class="class-prob-wrap">
+    <div class="class-prob-row">
+      <span>Negative</span>
+      <div class="class-prob-bar-bg">
+        <div class="class-prob-bar class-prob-bar--neg" style="width: {{ prob_negative }}%"></div>
+      </div>
+      <strong>{{ prob_negative }}%</strong>
+    </div>
+    <div class="class-prob-row">
+      <span>Positive</span>
+      <div class="class-prob-bar-bg">
+        <div class="class-prob-bar class-prob-bar--pos" style="width: {{ prob_positive }}%"></div>
+      </div>
+      <strong>{{ prob_positive }}%</strong>
+    </div>
+  </div>
+
+  <!-- Backend probability graph -->
+  <div class="fc-title" style="margin-top:1.5rem;">{{ prob_graph.title }}</div>
   <div class="prob-chart-wrap">
     <canvas id="probChart" height="110"></canvas>
   </div>
@@ -59,6 +82,7 @@
 <script>
 (function(){
   const RISK = {{ risk_prob }};
+  const PROB_GRAPH = {{ prob_graph|tojson }};
   const colorMap = { high:"#f04e42", moderate:"#f59e0b", low:"#10c97a" };
   const RISK_COLOR = colorMap["{{ risk_color }}"];
 
@@ -112,14 +136,10 @@
     }, 250);
   });
 
-  /* ── Bell curve chart ── */
+  /* ── Backend probability graph ── */
   const ctx = document.getElementById('probChart').getContext('2d');
-  const spread = 18;
-  const labels = [], pts = [];
-  for (let x = 0; x <= 100; x += 2) {
-    labels.push(x);
-    pts.push(Math.exp(-0.5 * Math.pow((x - RISK) / spread, 2)));
-  }
+  const labels = PROB_GRAPH.labels || [];
+  const pts = PROB_GRAPH.values || [];
 
   new Chart(ctx, {
     type: 'line',
@@ -143,11 +163,11 @@
       }]
     },
     options: {
-      animation: { duration: 1200, easing: 'easeOutCubic' },
+      animation: { duration: 900, easing: 'easeOutCubic' },
       plugins: { legend: { display: false },
         tooltip: { callbacks: {
-          title: (i) => `Risk: ${i[0].label}%`,
-          label: (i) => `Density: ${i.raw.toFixed(3)}`
+          title: (i) => `${PROB_GRAPH.x_label}: ${i[0].label}%`,
+          label: (i) => `${PROB_GRAPH.y_label}: ${Number(i.raw).toFixed(3)}`
         }}
       },
       scales: {
@@ -156,14 +176,19 @@
                    callback:(v,i) => labels[i] + '%' },
           grid: { color:'rgba(100,120,180,0.08)' }
         },
-        y: { display:false }
+        y: {
+          ticks: { color:'#9aa4c3', font:{size:9}, maxTicksLimit:4 },
+          grid: { color:'rgba(100,120,180,0.08)' }
+        }
       }
     },
     plugins: [{
       id: 'riskLine',
       afterDraw(chart) {
         const {ctx:c, chartArea, scales} = chart;
-        const nearest = labels.reduce((a,b) => Math.abs(b-RISK) < Math.abs(a-RISK) ? b : a);
+        if (!labels.length) return;
+        const marker = Number(PROB_GRAPH.point || RISK);
+        const nearest = labels.reduce((a,b) => Math.abs(b-marker) < Math.abs(a-marker) ? b : a);
         const xPos = scales.x.getPixelForValue(labels.indexOf(nearest));
         c.save();
         c.strokeStyle = RISK_COLOR;
@@ -177,7 +202,7 @@
         c.fillStyle = RISK_COLOR;
         c.font = 'bold 10px Plus Jakarta Sans, sans-serif';
         c.textAlign = 'center';
-        c.fillText(RISK.toFixed(1)+'%', xPos, chartArea.top - 5);
+        c.fillText(marker.toFixed(1)+'%', xPos, chartArea.top - 5);
         c.restore();
       }
     }]

@@ -1,0 +1,33 @@
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="{{ url_for('main') }}">
+      <span class="nav-logo-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+      </span>
+      DiseasePredict
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-hidden="true" tabindex="-1"/>
+    <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+    </label>
+    {% set ep = request.endpoint %}
+    <ul class="nav-links">
+      <li><a href="{{ url_for('diabetes') }}" class="{{ 'active' if ep in ('diabetes', 'predictdiabetes') else '' }}">Diabetes</a></li>
+      <li><a href="{{ url_for('heartdisease') }}" class="{{ 'active' if ep in ('heartdisease', 'predictheartdisease') else '' }}">Heart Disease</a></li>
+      <li><a href="{{ url_for('parkinsons') }}" class="{{ 'active' if ep in ('parkinsons', 'predictparkinsons') else '' }}">Parkinson's</a></li>
+    </ul>
+  </div>
+</nav>
+<script>
+(function () {
+  var t = document.getElementById('nav-toggle');
+  if (!t) return;
+  document.querySelectorAll('.site-nav .nav-links a').forEach(function (a) {
+    a.addEventListener('click', function () { t.checked = false; });
+  });
+})();
+</script>

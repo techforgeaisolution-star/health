@@ -1,354 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Heart Disease Prediction — DiseasePredict</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/main.css') }}"
-    />
-  </head>
-  <body>
-    <nav>
-      <a class="nav-logo" href="/">
-        <span class="nav-logo-icon">
-          <img
-            src="{{ url_for('static', filename='images.png') }}"
-            alt="Logo"
-          />
-        </span>
-        DiseasePredict
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/diabetes">Diabetes</a></li>
-        <li><a href="/heartdisease/">Heart Disease</a></li>
-        <li><a href="/parkinsons/">Parkinson's</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-    </nav>
-    <!-- blur overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heart Disease Prediction — DiseasePredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
 
-    <!-- right side panel -->
-    <aside class="nav-side-panel" id="navPanel">
-      <a href="/">Home</a>
-      <a href="/diabetes">Diabetes</a>
-      <a href="/heartdisease" class="active">Heart Disease</a>
-      <a href="/parkinsons">Parkinson's</a>
-      <a href="/about">About</a>
-    </aside>
+{% include 'partials/nav.html' %}
 
-    <div class="page-wrapper">
-      <div class="form-header">
-        <a class="back-link" href="/">← Back to Home</a>
-        <h1>❤️ Heart Disease Prediction</h1>
-        <p>
-          Provide your cardiac clinical values to evaluate heart disease risk
-        </p>
-      </div>
+<div class="page-wrapper">
+  <div class="form-header">
+    <a class="back-link" href="/">← Back to Home</a>
+    <h1>❤️ Heart Disease Prediction</h1>
+    <p>Provide your cardiac clinical values to evaluate heart disease risk</p>
+  </div>
 
-      <div class="form-container">
-        <form
-          action="{{ url_for('predictheartdisease') }}"
-          method="post"
-          id="mainForm"
-        >
-          <div class="form-grid">
-            <div class="field-group">
-              <label>Age (years)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="1"
-                  max="120"
-                  name="field1"
-                  placeholder="e.g. 52"
-                  required
-                />
-                <span class="range-tag">1 – 120</span>
-              </div>
-              <span class="field-hint">Patient age in years</span>
-              <span class="field-error">Enter a value between 1 and 120</span>
-            </div>
+  <div class="form-container">
+    <form action="{{ url_for('predictheartdisease') }}" method="post" id="mainForm">
+      <div class="form-grid">
 
-            <div class="field-group">
-              <label>Sex</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="1"
-                  name="field2"
-                  placeholder="0 = Female, 1 = Male"
-                  required
-                />
-                <span class="range-tag">0 or 1</span>
-              </div>
-              <span class="field-hint">0 = Female, 1 = Male</span>
-              <span class="field-error">Enter 0 (Female) or 1 (Male)</span>
-            </div>
-
-            <div class="field-group">
-              <label>Chest Pain Type (CP)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="3"
-                  name="field3"
-                  placeholder="0, 1, 2 or 3"
-                  required
-                />
-                <span class="range-tag">0 – 3</span>
-              </div>
-              <span class="field-hint"
-                >0=typical angina · 1=atypical · 2=non-anginal ·
-                3=asymptomatic</span
-              >
-              <span class="field-error">Enter 0, 1, 2 or 3</span>
-            </div>
-
-            <div class="field-group">
-              <label>Resting Blood Pressure (mmHg)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="94"
-                  max="200"
-                  name="field4"
-                  placeholder="e.g. 130"
-                  required
-                />
-                <span class="range-tag">94 – 200</span>
-              </div>
-              <span class="field-hint">Trestbps on hospital admission</span>
-              <span class="field-error">Enter a value between 94 and 200</span>
-            </div>
-
-            <div class="field-group">
-              <label>Cholesterol (mg/dL)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="126"
-                  max="564"
-                  name="field5"
-                  placeholder="e.g. 230"
-                  required
-                />
-                <span class="range-tag">126 – 564</span>
-              </div>
-              <span class="field-hint">Serum cholesterol level</span>
-              <span class="field-error">Enter a value between 126 and 564</span>
-            </div>
-
-            <div class="field-group">
-              <label>Fasting Blood Sugar (FBS)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="1"
-                  name="field6"
-                  placeholder="0 or 1"
-                  required
-                />
-                <span class="range-tag">0 or 1</span>
-              </div>
-              <span class="field-hint"
-                >1 if fasting blood sugar &gt; 120 mg/dL, else 0</span
-              >
-              <span class="field-error">Enter 0 or 1</span>
-            </div>
-
-            <div class="field-group">
-              <label>Resting ECG (RestECG)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="2"
-                  name="field7"
-                  placeholder="0, 1 or 2"
-                  required
-                />
-                <span class="range-tag">0 – 2</span>
-              </div>
-              <span class="field-hint"
-                >0=normal · 1=ST-T abnormality · 2=LV hypertrophy</span
-              >
-              <span class="field-error">Enter 0, 1 or 2</span>
-            </div>
-
-            <div class="field-group">
-              <label>Max Heart Rate (Thalach)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="71"
-                  max="202"
-                  name="field8"
-                  placeholder="e.g. 150"
-                  required
-                />
-                <span class="range-tag">71 – 202</span>
-              </div>
-              <span class="field-hint"
-                >Maximum heart rate achieved during exercise</span
-              >
-              <span class="field-error">Enter a value between 71 and 202</span>
-            </div>
-
-            <div class="field-group">
-              <label>Exercise Induced Angina</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="1"
-                  name="field9"
-                  placeholder="0 or 1"
-                  required
-                />
-                <span class="range-tag">0 or 1</span>
-              </div>
-              <span class="field-hint">1 = Yes, 0 = No</span>
-              <span class="field-error">Enter 0 or 1</span>
-            </div>
-
-            <div class="field-group">
-              <label>ST Depression (Oldpeak)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  max="6.20"
-                  name="field10"
-                  placeholder="e.g. 1.5"
-                  required
-                />
-                <span class="range-tag">0 – 6.20</span>
-              </div>
-              <span class="field-hint"
-                >ST depression induced by exercise relative to rest</span
-              >
-              <span class="field-error">Enter a value between 0 and 6.20</span>
-            </div>
-
-            <div class="field-group">
-              <label>Slope of ST Segment</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="2"
-                  name="field11"
-                  placeholder="0, 1 or 2"
-                  required
-                />
-                <span class="range-tag">0 – 2</span>
-              </div>
-              <span class="field-hint"
-                >0=upsloping · 1=flat · 2=downsloping</span
-              >
-              <span class="field-error">Enter 0, 1 or 2</span>
-            </div>
-
-            <div class="field-group">
-              <label>Major Vessels (CA)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="4"
-                  name="field12"
-                  placeholder="0, 1, 2, 3 or 4"
-                  required
-                />
-                <span class="range-tag">0 – 4</span>
-              </div>
-              <span class="field-hint"
-                >Number of major vessels colored by fluoroscopy</span
-              >
-              <span class="field-error">Enter a value between 0 and 4</span>
-            </div>
-
-            <div class="field-group">
-              <label>Thalassemia (Thal)</label>
-              <div class="input-wrap">
-                <input
-                  type="number"
-                  step="1"
-                  min="0"
-                  max="3"
-                  name="field13"
-                  placeholder="0, 1, 2 or 3"
-                  required
-                />
-                <span class="range-tag">0 – 3</span>
-              </div>
-              <span class="field-hint"
-                >0=normal · 1=fixed defect · 2=reversible defect · 3=other</span
-              >
-              <span class="field-error">Enter 0, 1, 2 or 3</span>
-            </div>
+        <div class="field-group">
+          <label>Age (years)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="1" max="120" name="field1" placeholder="e.g. 52" required/>
+            <span class="range-tag">1 – 120</span>
           </div>
-
-          <div class="submit-row">
-            <button type="submit" class="btn-predict">
-              Analyze &amp; Predict
-            </button>
-          </div>
-        </form>
-
-        <div class="disclaimer">
-          ⚠️ This tool is for educational purposes only and should not replace
-          professional medical diagnosis.
+          <span class="field-hint">Patient age in years</span>
+          <span class="field-error">Enter a value between 1 and 120</span>
         </div>
+
+        <div class="field-group">
+          <label>Sex</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="1" name="field2" placeholder="0 = Female, 1 = Male" required/>
+            <span class="range-tag">0 or 1</span>
+          </div>
+          <span class="field-hint">0 = Female, 1 = Male</span>
+          <span class="field-error">Enter 0 (Female) or 1 (Male)</span>
+        </div>
+
+        <div class="field-group">
+          <label>Chest Pain Type (CP)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="3" name="field3" placeholder="0, 1, 2 or 3" required/>
+            <span class="range-tag">0 – 3</span>
+          </div>
+          <span class="field-hint">0=typical angina · 1=atypical · 2=non-anginal · 3=asymptomatic</span>
+          <span class="field-error">Enter 0, 1, 2 or 3</span>
+        </div>
+
+        <div class="field-group">
+          <label>Resting Blood Pressure (mmHg)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="94" max="200" name="field4" placeholder="e.g. 130" required/>
+            <span class="range-tag">94 – 200</span>
+          </div>
+          <span class="field-hint">Trestbps on hospital admission</span>
+          <span class="field-error">Enter a value between 94 and 200</span>
+        </div>
+
+        <div class="field-group">
+          <label>Cholesterol (mg/dL)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="126" max="564" name="field5" placeholder="e.g. 230" required/>
+            <span class="range-tag">126 – 564</span>
+          </div>
+          <span class="field-hint">Serum cholesterol level</span>
+          <span class="field-error">Enter a value between 126 and 564</span>
+        </div>
+
+        <div class="field-group">
+          <label>Fasting Blood Sugar (FBS)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="1" name="field6" placeholder="0 or 1" required/>
+            <span class="range-tag">0 or 1</span>
+          </div>
+          <span class="field-hint">1 if fasting blood sugar &gt; 120 mg/dL, else 0</span>
+          <span class="field-error">Enter 0 or 1</span>
+        </div>
+
+        <div class="field-group">
+          <label>Resting ECG (RestECG)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="2" name="field7" placeholder="0, 1 or 2" required/>
+            <span class="range-tag">0 – 2</span>
+          </div>
+          <span class="field-hint">0=normal · 1=ST-T abnormality · 2=LV hypertrophy</span>
+          <span class="field-error">Enter 0, 1 or 2</span>
+        </div>
+
+        <div class="field-group">
+          <label>Max Heart Rate (Thalach)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="71" max="202" name="field8" placeholder="e.g. 150" required/>
+            <span class="range-tag">71 – 202</span>
+          </div>
+          <span class="field-hint">Maximum heart rate achieved during exercise</span>
+          <span class="field-error">Enter a value between 71 and 202</span>
+        </div>
+
+        <div class="field-group">
+          <label>Exercise Induced Angina</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="1" name="field9" placeholder="0 or 1" required/>
+            <span class="range-tag">0 or 1</span>
+          </div>
+          <span class="field-hint">1 = Yes, 0 = No</span>
+          <span class="field-error">Enter 0 or 1</span>
+        </div>
+
+        <div class="field-group">
+          <label>ST Depression (Oldpeak)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.01" min="0" max="6.20" name="field10" placeholder="e.g. 1.5" required/>
+            <span class="range-tag">0 – 6.20</span>
+          </div>
+          <span class="field-hint">ST depression induced by exercise relative to rest</span>
+          <span class="field-error">Enter a value between 0 and 6.20</span>
+        </div>
+
+        <div class="field-group">
+          <label>Slope of ST Segment</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="2" name="field11" placeholder="0, 1 or 2" required/>
+            <span class="range-tag">0 – 2</span>
+          </div>
+          <span class="field-hint">0=upsloping · 1=flat · 2=downsloping</span>
+          <span class="field-error">Enter 0, 1 or 2</span>
+        </div>
+
+        <div class="field-group">
+          <label>Major Vessels (CA)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="4" name="field12" placeholder="0, 1, 2, 3 or 4" required/>
+            <span class="range-tag">0 – 4</span>
+          </div>
+          <span class="field-hint">Number of major vessels colored by fluoroscopy</span>
+          <span class="field-error">Enter a value between 0 and 4</span>
+        </div>
+
+        <div class="field-group">
+          <label>Thalassemia (Thal)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="3" name="field13" placeholder="0, 1, 2 or 3" required/>
+            <span class="range-tag">0 – 3</span>
+          </div>
+          <span class="field-hint">0=normal · 1=fixed defect · 2=reversible defect · 3=other</span>
+          <span class="field-error">Enter 0, 1, 2 or 3</span>
+        </div>
+
       </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-predict">Analyze &amp; Predict</button>
+      </div>
+    </form>
+
+    <div class="disclaimer">
+      ⚠️ This tool is for educational purposes only and should not replace professional medical diagnosis.
     </div>
+  </div>
+</div>
 
-    <script src="{{ url_for('static', filename='js/validate.js') }}"></script>
-    <script>
-      const navToggle = document.getElementById("navToggle");
-      const navPanel = document.getElementById("navPanel");
-      const navOverlay = document.getElementById("navOverlay");
-
-      function openNav() {
-        navToggle.classList.add("active");
-        navPanel.classList.add("active");
-        navOverlay.classList.add("active");
-      }
-
-      function closeNav() {
-        navToggle.classList.remove("active");
-        navPanel.classList.remove("active");
-        navOverlay.classList.remove("active");
-      }
-
-      navToggle.addEventListener("click", () =>
-        navPanel.classList.contains("active") ? closeNav() : openNav()
-      );
-
-      navOverlay.addEventListener("click", closeNav);
-    </script>
-  </body>
+<script src="{{ url_for('static', filename='js/validate.js') }}"></script>
+</body>
 </html>
