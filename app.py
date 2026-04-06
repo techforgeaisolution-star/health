@@ -270,5 +270,26 @@ def predictheartdisease():
     )
 
 
+@app.route("/chat", methods=["POST"])
+def chat():
+    data = request.get_json()
+    user_message = data.get("message", "").lower()
+
+    if "diabetes" in user_message:
+        response = "To check for diabetes risk, please use our Diabetes screening tool. It evaluates factors like Glucose and BMI."
+    elif "heart" in user_message:
+        response = "Our Heart Disease tool evaluates risk based on cholesterol, age, and heart rate data."
+    elif "parkinson" in user_message:
+        response = "The Parkinson's screening uses voice features like jitter and shimmer to assess risk."
+    elif any(word in user_message for word in ["hi", "hello", "hey"]):
+        response = "Hello! I'm the DiseasePredict assistant. How can I help you today? I can explain our screening tools."
+    elif "help" in user_message:
+        response = "I can guide you through our screening tools for Diabetes, Heart Disease, and Parkinson's. Which would you like to know more about?"
+    else:
+        response = "I'm here to help with questions about our disease screening tools. Try asking about Diabetes, Heart Disease, or Parkinson's."
+
+    return {"response": response}
+
+
 if __name__ == "__main__":
     app.run(debug=True)
