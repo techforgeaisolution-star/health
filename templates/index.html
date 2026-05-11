@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DiseasePredict — AI Disease Screening</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+{% include 'partials/nav.html' %}
+
+<section class="hero hero--home">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-badge reveal">
+      <span>AI-Powered Health System</span>
+    </div>
+
+    <h1 class="reveal reveal--delay-1 hero-title">
+      Understand Your Health<br/>
+      <span>With Our AI-Powered Health System</span>
+    </h1>
+
+    <p class="hero-lead reveal reveal--delay-2">
+      Our AI-powered health system uses advanced machine learning to analyze your health data and provide you with a personalized health report.
+    </p>
+
+    <div class="cards-grid reveal reveal--delay-3">
+      <a class="disease-card" href="{{ url_for('diabetes') }}">
+        <div class="card-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+        </div>
+        <h3>Diabetes</h3>
+        <p>Glucose, BMI, insulin, age, blood pressure, and pedigree — run a quick metabolic risk screen.</p>
+        <span class="card-arrow">Run Prediction →</span>
+      </a>
+
+      <a class="disease-card" href="{{ url_for('heartdisease') }}">
+        <div class="card-icon purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h3>Heart Disease</h3>
+        <p>Cholesterol, chest pain pattern, ECG, max heart rate, and exercise ST — cardiac risk at a glance.</p>
+        <span class="card-arrow">Run Prediction →</span>
+      </a>
+
+      <a class="disease-card" href="{{ url_for('parkinsons') }}">
+        <div class="card-icon teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5 5 4 4 0 0 1-5-5 4 4 0 0 1-5 5 4 4 0 0 1-5-5"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+        <h3>Parkinson's</h3>
+        <p>Voice biomarkers (jitter, shimmer, HNR, PPE, and more) — research-style speech screening.</p>
+        <span class="card-arrow">Run Prediction →</span>
+      </a>
+    </div>
+
+    <div class="scroll-indicator reveal reveal--delay-4">
+      <span>Scroll to explore</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <header class="section-head reveal">
+      <p class="section-eyebrow">What we offer</p>
+      <h2>Three screening services, one goal</h2>
+      <p class="section-sub">Each tool uses a dedicated machine learning model trained on clinical or voice-derived datasets. Pick the assessment that matches the data you have — none of them replace a doctor.</p>
+    </header>
+
+    <div class="services-grid">
+      <article class="service-card reveal reveal--delay-1">
+        <div class="service-num">01</div>
+        <h3>Diabetes risk assessment</h3>
+        <p class="service-lead">Ideal when you have lab-style inputs: pregnancies, glucose, blood pressure, skin thickness, insulin, BMI, diabetes pedigree, and age.</p>
+        <ul class="service-list">
+          <li><strong>What you get:</strong> a positive/negative style prediction plus a visual risk score and factor breakdown.</li>
+          <li><strong>Best for:</strong> learning how metabolic markers relate to model output — educational use only.</li>
+          <li><strong>Output:</strong> lifestyle-oriented precautions and an optional PDF report on the results page.</li>
+        </ul>
+        <a class="service-cta" href="{{ url_for('diabetes') }}">Open diabetes form →</a>
+      </article>
+
+      <article class="service-card reveal reveal--delay-2">
+        <div class="service-num">02</div>
+        <h3>Heart disease risk assessment</h3>
+        <p class="service-lead">Uses classic cardiac features: age, sex, chest pain type, resting BP, cholesterol, fasting sugar, ECG, max heart rate, angina, ST depression, slope, vessels, and thalassemia flag.</p>
+        <ul class="service-list">
+          <li><strong>What you get:</strong> an instant cardiac-risk style readout with charts for cholesterol, age, heart-rate reserve, and ST change.</li>
+          <li><strong>Best for:</strong> exploring how structured heart-disease datasets map to model scores.</li>
+          <li><strong>Output:</strong> precaution list and downloadable summary for your records (not for diagnosis).</li>
+        </ul>
+        <a class="service-cta" href="{{ url_for('heartdisease') }}">Open heart disease form →</a>
+      </article>
+
+      <article class="service-card reveal reveal--delay-3">
+        <div class="service-num">03</div>
+        <h3>Parkinson's speech screening</h3>
+        <p class="service-lead">Based on voice measurements (MDVP fundamentals, jitter, shimmer, noise ratios, nonlinear metrics, spread, D2, PPE, and related fields).</p>
+        <ul class="service-list">
+          <li><strong>What you get:</strong> a risk score aligned with published voice biomarker research, with jitter/shimmer/HNR/PPE highlighted.</li>
+          <li><strong>Best for:</strong> demos and coursework around biomedical signal / speech features.</li>
+          <li><strong>Output:</strong> guidance-style precautions and PDF export — always confirm with a neurologist.</li>
+        </ul>
+        <a class="service-cta" href="{{ url_for('parkinsons') }}">Open Parkinson's form →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="how-section reveal">
+  <div class="section-inner how-inner">
+    <div class="how-copy">
+      <p class="section-eyebrow">How it works</p>
+      <h2>From your numbers to a clear report</h2>
+      <p class="section-sub">No account required. Everything runs in your browser session until you submit the form.</p>
+      <ol class="how-steps">
+        <li><strong>Choose a service</strong> — diabetes, heart, or Parkinson's — based on which measurements you can provide.</li>
+        <li><strong>Enter validated ranges</strong> — fields highlight green or red as you type so outliers are obvious.</li>
+        <li><strong>Review the result</strong> — risk band, gauge, factor bars, and plain-language precautions; download a PDF if you need to share or archive.</li>
+      </ol>
+    </div>
+    <div class="how-panel">
+      <div class="how-panel-card reveal reveal--delay-1">
+        <span class="how-icon">🔒</span>
+        <h4>Privacy-minded</h4>
+        <p>We do not store your form data on a user profile — each prediction is a one-off request to the server.</p>
+      </div>
+      <div class="how-panel-card reveal reveal--delay-2">
+        <span class="how-icon">📋</span>
+        <h4>Clinician-ready language</h4>
+        <p>Use outputs to prepare questions for your doctor, not to self-diagnose or change treatment.</p>
+      </div>
+     
+    </div>
+
+  </div>
+</section>
+
+
+<section class="trust-section" id="trust">
+  <div class="trust-inner reveal">
+    <span class="section-label">Why Trust Us</span>
+    <h2>Built With Integrity</h2>
+    <p class="trust-subtitle">Every decision we made — from data to design — was guided by transparency, privacy, and scientific rigour.</p>
+
+    <div class="trust-grid">
+      <div class="trust-card reveal reveal--delay-1">
+        <div class="trust-icon-wrap blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </div>
+        <div class="trust-content">
+          <div class="trust-tag">Data Source</div>
+          <h3>Real Clinical Data</h3>
+          <p>Models trained on peer-reviewed datasets from the UCI ML Repository — not synthetic or fabricated.</p>
+        </div>
+        <div class="trust-shine"></div>
+      </div>
+
+      <div class="trust-card reveal reveal--delay-2">
+        <div class="trust-icon-wrap green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <div class="trust-content">
+          <div class="trust-tag">Privacy</div>
+          <h3>100% Private</h3>
+          <p>Your health data never leaves your session. No accounts, no cloud storage, no tracking whatsoever.</p>
+        </div>
+        <div class="trust-shine"></div>
+      </div>
+
+      <div class="trust-card reveal reveal--delay-3">
+        <div class="trust-icon-wrap purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+            <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+          </svg>
+        </div>
+        <div class="trust-content">
+          <div class="trust-tag">Transparency</div>
+          <h3>Explainable AI</h3>
+          <p>Every result comes with a confidence score so you understand exactly what drives the prediction.</p>
+        </div>
+        <div class="trust-shine"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-cta">
+  <div class="home-cta-inner reveal">
+    <h2>Ready to explore your first assessment?</h2>
+    <p>Start with the condition where you have the most complete measurements.</p>
+    <div class="home-cta-btns">
+      <a class="btn-cta primary" href="{{ url_for('diabetes') }}">Diabetes</a>
+      <a class="btn-cta primary" href="{{ url_for('heartdisease') }}">Heart disease</a>
+      <a class="btn-cta primary" href="{{ url_for('parkinsons') }}">Parkinson's</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="footer-logo" href="{{ url_for('main') }}">
+          <span class="footer-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </span>
+          DiseasePredict
+        </a>
+        <p class="footer-tagline">AI-powered early disease risk assessment built by MCA students with real clinical data.</p>
+        <div class="footer-badges">
+          <span class="fbadge">Flask</span>
+          <span class="fbadge">scikit-learn</span>
+          <span class="fbadge">Privacy First</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-group">
+        <div class="footer-col">
+          <div class="footer-col-title">Predictions</div>
+          <ul>
+            <li><a href="{{ url_for('diabetes') }}">Diabetes</a></li>
+            <li><a href="{{ url_for('heartdisease') }}">Heart Disease</a></li>
+            <li><a href="{{ url_for('parkinsons') }}">Parkinson's</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="#trust">Why Trust Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <span>© 2025 DiseasePredict · BTech Final Year Project</span>
+      <div class="footer-warning">Educational use only — not a medical substitute</div>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+</body>
+</html>

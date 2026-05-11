@@ -1,0 +1,8 @@
+# Web
+Flask>=3.0.0
+gunicorn>=21.0.0
+
+# ML runtime (app + training scripts)
+numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.5.0

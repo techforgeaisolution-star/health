@@ -1,0 +1,157 @@
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="{{ url_for('main') }}">
+      <span class="nav-logo-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+      </span>
+      DiseasePredict
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-hidden="true" tabindex="-1"/>
+    <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+    </label>
+    {% set ep = request.endpoint %}
+    <ul class="nav-links">
+      <li><a href="{{ url_for('main') }}" class="{{ 'active' if ep == 'main' else '' }}">Home</a></li>
+      <li><a href="{{ url_for('about') }}" class="{{ 'active' if ep == 'about' else '' }}">About</a></li>
+      <li><a href="{{ url_for('diabetes') }}" class="{{ 'active' if ep in ('diabetes', 'predictdiabetes') else '' }}">Diabetes</a></li>
+      <li><a href="{{ url_for('heartdisease') }}" class="{{ 'active' if ep in ('heartdisease', 'predictheartdisease') else '' }}">Heart Disease</a></li>
+      <li><a href="{{ url_for('parkinsons') }}" class="{{ 'active' if ep in ('parkinsons', 'predictparkinsons') else '' }}">Parkinson's</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="chatbot-widget" id="health-chatbot" aria-label="Chat assistant">
+  <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open chat" title="Ask HealthGuide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <path d="M8 10h.01M12 10h.01M16 10h.01"/>
+    </svg>
+  </button>
+
+  <div class="chatbot-panel" id="chatbot-panel" role="dialog" aria-label="Chat with HealthGuide">
+    <div class="chatbot-header">
+      <div class="chatbot-avatar">💬</div>
+      <div class="chatbot-header-info">
+        <strong>HealthGuide</strong>
+        <span>AI Assistant</span>
+      </div>
+      <button class="chatbot-close" id="chatbot-close" aria-label="Close chat">&times;</button>
+    </div>
+
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="message bot">
+        <div class="msg-content">Hi! I'm <strong>HealthGuide</strong>, your assistant for DiseasePredict. Ask me about our screening tools, how to interpret results, or anything else!</div>
+      </div>
+    </div>
+
+    <div class="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Type your question here..." autocomplete="off"/>
+      <button class="chatbot-send" id="chatbot-send">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var t = document.getElementById('nav-toggle');
+  if (!t) return;
+  document.querySelectorAll('.site-nav .nav-links a').forEach(function (a) {
+    a.addEventListener('click', function () { t.checked = false; });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  'use strict';
+
+  var toggle = document.getElementById('chatbot-toggle');
+  var panel  = document.getElementById('chatbot-panel');
+  var close  = document.getElementById('chatbot-close');
+  var input  = document.getElementById('chatbot-input');
+  var send   = document.getElementById('chatbot-send');
+  var msgs   = document.getElementById('chatbot-messages');
+
+  if (!toggle || !panel || !close || !input || !send || !msgs) return;
+
+  toggle.addEventListener('click', function () {
+    panel.classList.add('open');
+    toggle.style.display = 'none';
+    setTimeout(function () { input.focus(); }, 350);
+  });
+
+  close.addEventListener('click', function () {
+    panel.classList.remove('open');
+    toggle.style.display = 'flex';
+  });
+
+  function formatMsg(text) {
+    var el = document.createElement('div');
+    el.className = 'msg-content';
+    el.innerHTML = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+    return el;
+  }
+
+  function addMessage(text, sender) {
+    var div = document.createElement('div');
+    div.className = 'message ' + sender;
+    div.appendChild(formatMsg(text));
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showTyping() {
+    var div = document.createElement('div');
+    div.className = 'message bot';
+    div.id = 'chatbot-typing';
+    var inner = document.createElement('div');
+    inner.className = 'msg-content';
+    var pulse = document.createElement('span');
+    pulse.className = 'dot-pulse';
+    inner.appendChild(pulse);
+    div.appendChild(inner);
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function hideTyping() {
+    var el = document.getElementById('chatbot-typing');
+    if (el) el.remove();
+  }
+
+  function sendMessage() {
+    var text = input.value.trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    input.value = '';
+    showTyping();
+    fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      hideTyping();
+      addMessage(data.response, 'bot');
+    })
+    .catch(function () {
+      hideTyping();
+      addMessage("Sorry, I couldn't process that. Please try again.", 'bot');
+    });
+  }
+
+  send.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') sendMessage(); });
+})();
+</script>

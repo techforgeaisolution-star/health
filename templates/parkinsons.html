@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parkinson's Prediction — DiseasePredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+{% include 'partials/nav.html' %}
+
+<div class="page-wrapper">
+  <div class="form-header">
+    <a class="back-link" href="/">← Back to Home</a>
+    <h1>🧠 Parkinson's Prediction</h1>
+    <p>Enter voice biomarker measurements to detect Parkinson's disease risk</p>
+  </div>
+
+  <div class="form-container">
+    <form action="{{ url_for('predictparkinsons') }}" method="post" id="mainForm">
+      <div class="form-grid">
+
+        <div class="field-group">
+          <label>MDVP:Fo (Hz)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.001" min="88.333" max="260.105" name="field1" placeholder="e.g. 150.0" required/>
+            <span class="range-tag">88.333 – 260.105</span>
+          </div>
+          <span class="field-hint">Average vocal fundamental frequency</span>
+          <span class="field-error">Enter a value between 88.333 and 260.105</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Fhi (Hz)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.001" min="102.145" max="592.030" name="field2" placeholder="e.g. 200.0" required/>
+            <span class="range-tag">102.145 – 592.030</span>
+          </div>
+          <span class="field-hint">Maximum vocal fundamental frequency</span>
+          <span class="field-error">Enter a value between 102.145 and 592.030</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Flo (Hz)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.001" min="65.476" max="239.170" name="field3" placeholder="e.g. 110.0" required/>
+            <span class="range-tag">65.476 – 239.170</span>
+          </div>
+          <span class="field-hint">Minimum vocal fundamental frequency</span>
+          <span class="field-error">Enter a value between 65.476 and 239.170</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Jitter (%)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.001680" max="0.033160" name="field4" placeholder="e.g. 0.006" required/>
+            <span class="range-tag">0.00168 – 0.03316</span>
+          </div>
+          <span class="field-hint">Frequency variation measure</span>
+          <span class="field-error">Enter a value between 0.00168 and 0.03316</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Jitter (Abs)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.0000001" min="0.000007" max="0.000260" name="field5" placeholder="e.g. 0.000044" required/>
+            <span class="range-tag">0.000007 – 0.000260</span>
+          </div>
+          <span class="field-hint">Absolute jitter in seconds</span>
+          <span class="field-error">Enter a value between 0.000007 and 0.000260</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:RAP</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.000680" max="0.021440" name="field6" placeholder="e.g. 0.003" required/>
+            <span class="range-tag">0.00068 – 0.02144</span>
+          </div>
+          <span class="field-hint">Relative average perturbation</span>
+          <span class="field-error">Enter a value between 0.00068 and 0.02144</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:PPQ</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.000920" max="0.019580" name="field7" placeholder="e.g. 0.003" required/>
+            <span class="range-tag">0.00092 – 0.01958</span>
+          </div>
+          <span class="field-hint">Five-point period perturbation quotient</span>
+          <span class="field-error">Enter a value between 0.00092 and 0.01958</span>
+        </div>
+
+        <div class="field-group">
+          <label>Jitter:DDP</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.002040" max="0.064330" name="field8" placeholder="e.g. 0.009" required/>
+            <span class="range-tag">0.00204 – 0.06433</span>
+          </div>
+          <span class="field-hint">Average absolute difference of jitter</span>
+          <span class="field-error">Enter a value between 0.00204 and 0.06433</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Shimmer</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.009540" max="0.119080" name="field9" placeholder="e.g. 0.030" required/>
+            <span class="range-tag">0.00954 – 0.11908</span>
+          </div>
+          <span class="field-hint">Local amplitude variation</span>
+          <span class="field-error">Enter a value between 0.00954 and 0.11908</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:Shimmer (dB)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.001" min="0.085" max="1.302" name="field10" placeholder="e.g. 0.280" required/>
+            <span class="range-tag">0.085 – 1.302</span>
+          </div>
+          <span class="field-hint">Shimmer in decibels</span>
+          <span class="field-error">Enter a value between 0.085 and 1.302</span>
+        </div>
+
+        <div class="field-group">
+          <label>Shimmer:APQ3</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.004550" max="0.056470" name="field11" placeholder="e.g. 0.015" required/>
+            <span class="range-tag">0.00455 – 0.05647</span>
+          </div>
+          <span class="field-hint">3-point amplitude perturbation quotient</span>
+          <span class="field-error">Enter a value between 0.00455 and 0.05647</span>
+        </div>
+
+        <div class="field-group">
+          <label>Shimmer:APQ5</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.005700" max="0.079400" name="field12" placeholder="e.g. 0.020" required/>
+            <span class="range-tag">0.0057 – 0.0794</span>
+          </div>
+          <span class="field-hint">5-point amplitude perturbation quotient</span>
+          <span class="field-error">Enter a value between 0.0057 and 0.0794</span>
+        </div>
+
+        <div class="field-group">
+          <label>MDVP:APQ</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.007190" max="0.137780" name="field13" placeholder="e.g. 0.025" required/>
+            <span class="range-tag">0.00719 – 0.13778</span>
+          </div>
+          <span class="field-hint">11-point amplitude perturbation quotient</span>
+          <span class="field-error">Enter a value between 0.00719 and 0.13778</span>
+        </div>
+
+        <div class="field-group">
+          <label>Shimmer:DDA</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.013640" max="0.169420" name="field14" placeholder="e.g. 0.045" required/>
+            <span class="range-tag">0.01364 – 0.16942</span>
+          </div>
+          <span class="field-hint">Average absolute difference of shimmer</span>
+          <span class="field-error">Enter a value between 0.01364 and 0.16942</span>
+        </div>
+
+        <div class="field-group">
+          <label>NHR</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.000650" max="0.314820" name="field15" placeholder="e.g. 0.025" required/>
+            <span class="range-tag">0.00065 – 0.31482</span>
+          </div>
+          <span class="field-hint">Noise-to-harmonics ratio</span>
+          <span class="field-error">Enter a value between 0.00065 and 0.31482</span>
+        </div>
+
+        <div class="field-group">
+          <label>HNR</label>
+          <div class="input-wrap">
+            <input type="number" step="0.001" min="8.441" max="33.047" name="field16" placeholder="e.g. 21.0" required/>
+            <span class="range-tag">8.441 – 33.047</span>
+          </div>
+          <span class="field-hint">Harmonics-to-noise ratio</span>
+          <span class="field-error">Enter a value between 8.441 and 33.047</span>
+        </div>
+
+        <div class="field-group">
+          <label>RPDE</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.256570" max="0.685151" name="field17" placeholder="e.g. 0.470" required/>
+            <span class="range-tag">0.25657 – 0.68515</span>
+          </div>
+          <span class="field-hint">Recurrence period density entropy</span>
+          <span class="field-error">Enter a value between 0.25657 and 0.68515</span>
+        </div>
+
+        <div class="field-group">
+          <label>DFA</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.574282" max="0.825288" name="field18" placeholder="e.g. 0.700" required/>
+            <span class="range-tag">0.57428 – 0.82529</span>
+          </div>
+          <span class="field-hint">Signal fractal scaling exponent</span>
+          <span class="field-error">Enter a value between 0.57428 and 0.82529</span>
+        </div>
+
+        <div class="field-group">
+          <label>Spread1</label>
+          <div class="input-wrap">
+            <input type="number" step="0.0001" min="-7.9648" max="-2.4341" name="field19" placeholder="e.g. -5.0" required/>
+            <span class="range-tag">−7.965 – −2.434</span>
+          </div>
+          <span class="field-hint">Nonlinear fundamental frequency variation</span>
+          <span class="field-error">Enter a value between −7.965 and −2.434</span>
+        </div>
+
+        <div class="field-group">
+          <label>Spread2</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.006274" max="0.450493" name="field20" placeholder="e.g. 0.200" required/>
+            <span class="range-tag">0.00627 – 0.45049</span>
+          </div>
+          <span class="field-hint">Nonlinear fundamental frequency measure</span>
+          <span class="field-error">Enter a value between 0.00627 and 0.45049</span>
+        </div>
+
+        <div class="field-group">
+          <label>D2</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="1.423287" max="3.671155" name="field21" placeholder="e.g. 2.300" required/>
+            <span class="range-tag">1.423 – 3.671</span>
+          </div>
+          <span class="field-hint">Correlation dimension</span>
+          <span class="field-error">Enter a value between 1.423 and 3.671</span>
+        </div>
+
+        <div class="field-group">
+          <label>PPE</label>
+          <div class="input-wrap">
+            <input type="number" step="0.000001" min="0.044539" max="0.527367" name="field22" placeholder="e.g. 0.200" required/>
+            <span class="range-tag">0.04454 – 0.52737</span>
+          </div>
+          <span class="field-hint">Pitch period entropy</span>
+          <span class="field-error">Enter a value between 0.04454 and 0.52737</span>
+        </div>
+
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-predict">Analyze &amp; Predict</button>
+      </div>
+    </form>
+
+    <div class="disclaimer">
+      ⚠️ This tool is for educational purposes only and should not replace professional medical diagnosis.
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/validate.js') }}"></script>
+</body>
+</html>

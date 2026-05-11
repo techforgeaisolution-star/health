@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — DiseasePredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+{% include 'partials/nav.html' %}
+
+<section class="hero about-hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="section-eyebrow reveal">About the Project</p>
+    <h1 class="reveal reveal--delay-1">AI-Powered Health Prediction System</h1>
+    <p class="hero-lead reveal reveal--delay-2">Leveraging machine learning to provide early risk assessments for chronic diseases</p>
+  </div>
+</section>
+
+<div class="page-wrapper about-wrapper">
+  <div class="about-content">
+
+    <section class="about-section">
+      <div class="about-grid">
+        <div class="about-copy">
+          <h2>What is DiseasePredict?</h2>
+          <p>DiseasePredict is an AI-powered health screening system that uses advanced machine learning models to assess the risk of three major chronic diseases: <strong>Diabetes</strong>, <strong>Heart Disease</strong>, and <strong>Parkinson's Disease</strong>.</p>
+          <p>Our system analyzes various health indicators and biomarkers to provide risk assessments, helping users understand their potential health risks before visiting a healthcare provider.</p>
+        </div>
+        <div class="about-visual">
+          <div class="about-card">
+            <div class="about-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            <h3>97% Accuracy</h3>
+            <p>Trained on verified clinical datasets</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section alt">
+      <div class="about-grid reversed">
+        <div class="about-copy">
+          <h2>How It Works</h2>
+          <p>Our prediction system uses three different machine learning models, each trained on disease-specific datasets:</p>
+          <ul class="about-list">
+            <li>
+              <strong>Diabetes Model</strong> — Analyzes metabolic markers including glucose levels, BMI, insulin, age, blood pressure, and family history to assess diabetes risk.
+            </li>
+            <li>
+              <strong>Heart Disease Model</strong> — Examines cardiovascular indicators such as cholesterol, chest pain patterns, ECG results, maximum heart rate, and exercise tolerance.
+            </li>
+            <li>
+              <strong>Parkinson's Model</strong> — Uses voice biomarker analysis (jitter, shimmer, HNR, PPE) to detect early signs of Parkinson's disease from speech patterns.
+            </li>
+          </ul>
+        </div>
+        <div class="about-visual">
+          <div class="model-cards">
+            <div class="model-card blue">
+              <span class="model-icon">🩸</span>
+              <span>Diabetes</span>
+            </div>
+            <div class="model-card purple">
+              <span class="model-icon">❤️</span>
+              <span>Heart</span>
+            </div>
+            <div class="model-card teal">
+              <span class="model-icon">🧠</span>
+              <span>Parkinson's</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-grid">
+        <div class="about-copy">
+          <h2>Technology Stack</h2>
+          <p>DiseasePredict is built using modern web and machine learning technologies:</p>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <span class="tech-label">Backend</span>
+              <span class="tech-value">Python, Flask</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-label">ML Library</span>
+              <span class="tech-value">Scikit-learn</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-label">Frontend</span>
+              <span class="tech-value">HTML5, CSS3, JavaScript</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-label">Deployment</span>
+              <span class="tech-value">Render / Railway</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="tech-visual">
+            <div class="code-block">
+              <code>
+import pickle<br/>
+model = pickle.load(open('diabetes.pkl', 'rb'))<br/>
+prediction = model.predict(features)
+              </code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section alt">
+      <div class="about-grid reversed">
+        <div class="about-copy">
+          <h2>Key Features</h2>
+          <ul class="features-list">
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Real-time Predictions</strong>
+                <p>Get instant risk assessments in less than a second</p>
+              </div>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Visual Risk Display</strong>
+                <p>Interactive gauges and probability charts for better understanding</p>
+              </div>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>PDF Reports</strong>
+                <p>Download detailed reports to share with healthcare providers</p>
+              </div>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Privacy First</strong>
+                <p>Your data is never stored — each prediction is a one-off request</p>
+              </div>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Input Validation</strong>
+                <p>Real-time field validation with visual feedback</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="about-visual">
+          <div class="feature-cards">
+            <div class="feature-card mini">
+              <span class="mini-icon">⚡</span>
+              <span>Fast</span>
+            </div>
+            <div class="feature-card mini">
+              <span class="mini-icon">📊</span>
+              <span>Visual</span>
+            </div>
+            <div class="feature-card mini">
+              <span class="mini-icon">📄</span>
+              <span>PDF</span>
+            </div>
+            <div class="feature-card mini">
+              <span class="mini-icon">🔒</span>
+              <span>Private</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <div class="team-inner">
+        <div class="team-header">
+          <span class="section-label">Our Team</span>
+          <h2>B.Tech CSE &middot; GEC Palamu</h2>
+          <p class="team-subtitle">Computer Science & Engineering students from Government Engineering College, Palamu</p>
+        </div>
+
+        <div class="team-meta">
+          <div class="team-pill">
+            <span class="dot"></span>
+            Subject: <strong>CSE2026</strong>
+          </div>
+          <div class="team-pill">
+            <span class="dot"></span>
+            Project: <strong>DiseasePredict</strong>
+          </div>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">MK</div>
+            <h3>Mahi Kumari</h3>
+            <span class="team-role">Developer</span>
+            <div class="team-info">Roll: 22020440014</div>
+            <div class="team-info">Dept: CSE</div>
+            <div class="team-socials">
+              <button class="contact-btn" onclick="window.location.href='mailto:mahi@example.com'">Contact</button>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">JK</div>
+            <h3>Jigaysa Kumari</h3>
+            <span class="team-role">Developer</span>
+            <div class="team-info">Roll: 22040440030</div>
+            <div class="team-info">Dept: CSE</div>
+            <div class="team-socials">
+              <button class="contact-btn" onclick="window.location.href='mailto:jigaysa@example.com'">Contact</button>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">VK</div>
+            <h3>Vinay Kumar</h3>
+            <span class="team-role">Developer</span>
+            <div class="team-info">Roll: 22040440064</div>
+            <div class="team-info">Dept: CSE</div>
+            <div class="team-socials">
+              <button class="contact-btn" onclick="window.location.href='mailto:vinay@example.com'">Contact</button>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">VK</div>
+            <h3>Vishal Karmali</h3>
+            <span class="team-role">Developer</span>
+            <div class="team-info">Roll: 22040440065</div>
+            <div class="team-info">Dept: CSE</div>
+            <div class="team-socials">
+              <button class="contact-btn" onclick="window.location.href='mailto:vishal@example.com'">Contact</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<section class="about-cta">
+  <div class="cta-inner">
+    <h2>Ready to Get Started?</h2>
+    <p>Start with your first health assessment today. Choose a screening tool and get instant results.</p>
+    <div class="cta-buttons">
+      <a href="{{ url_for('diabetes') }}" class="btn-cta primary">Diabetes Screening</a>
+      <a href="{{ url_for('heartdisease') }}" class="btn-cta primary">Heart Disease</a>
+      <a href="{{ url_for('parkinsons') }}" class="btn-cta primary">Parkinson's</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="footer-logo" href="{{ url_for('main') }}">
+          <span class="footer-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </span>
+          DiseasePredict
+        </a>
+        <p class="footer-tagline">AI-powered early disease risk assessment built by B.Tech CSE students with real clinical data.</p>
+        <div class="footer-badges">
+          <span class="fbadge">Flask</span>
+          <span class="fbadge">scikit-learn</span>
+          <span class="fbadge">Privacy First</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-group">
+        <div class="footer-col">
+          <div class="footer-col-title">Predictions</div>
+          <ul>
+            <li><a href="{{ url_for('diabetes') }}">Diabetes</a></li>
+            <li><a href="{{ url_for('heartdisease') }}">Heart Disease</a></li>
+            <li><a href="{{ url_for('parkinsons') }}">Parkinson's</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <span>© 2025 DiseasePredict &middot; CSE2026 GEC Palamu</span>
+      <div class="footer-warning">Educational use only &middot; not a medical substitute</div>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+</body>
+</html>

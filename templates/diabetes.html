@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diabetes Prediction — DiseasePredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+</head>
+<body>
+
+{% include 'partials/nav.html' %}
+
+<div class="page-wrapper">
+
+  <div class="form-header">
+    <a class="back-link" href="{{ url_for('main') }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Back to Home
+    </a>
+    <div class="form-header-badge">Screening Tool · 01</div>
+    <h1>🩸 Diabetes Risk Assessment</h1>
+    <p>Enter your clinical parameters below to receive an AI-powered diabetes risk evaluation</p>
+    <div class="form-header-meta">
+      <span class="fh-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Data not stored
+      </span>
+      <span class="fh-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Results in &lt;1 second
+      </span>
+      <span class="fh-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        PDF report available
+      </span>
+    </div>
+  </div>
+
+  <div class="form-info-strip">
+    <div class="fi-card">
+      <span class="fi-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#2563eb">🩸</span>
+      <div>
+        <strong>8 Parameters</strong>
+        <span>Metabolic &amp; clinical markers</span>
+      </div>
+    </div>
+    <div class="fi-card">
+      <span class="fi-icon" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#16a34a">📊</span>
+      <div>
+        <strong>Risk Score</strong>
+        <span>Visual gauge + factor bars</span>
+      </div>
+    </div>
+    <div class="fi-card">
+      <span class="fi-icon" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#7c3aed">🧬</span>
+      <div>
+        <strong>UCI Dataset</strong>
+        <span>Pima Indians Diabetes data</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <form action="{{ url_for('predictdiabetes') }}" method="post" id="mainForm">
+
+      <div class="form-section-label">Patient Information</div>
+      <div class="form-grid">
+
+        <div class="field-group">
+          <label>Pregnancies</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="17" name="field1" placeholder="e.g. 2" required/>
+            <span class="range-tag">0 – 17</span>
+          </div>
+          <span class="field-hint">Number of times pregnant (0 if male or not applicable)</span>
+          <span class="field-error">Enter a value between 0 and 17</span>
+        </div>
+
+        <div class="field-group">
+          <label>Age (years)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="1" max="120" name="field8" placeholder="e.g. 35" required/>
+            <span class="range-tag">1 – 120</span>
+          </div>
+          <span class="field-hint">Patient age in years</span>
+          <span class="field-error">Enter a value between 1 and 120</span>
+        </div>
+
+      </div>
+
+      <div class="form-section-label">Blood &amp; Metabolic Markers</div>
+      <div class="form-grid">
+
+        <div class="field-group">
+          <label>Glucose (mg/dL)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="199" name="field2" placeholder="e.g. 120" required/>
+            <span class="range-tag">0 – 199</span>
+          </div>
+          <span class="field-hint">Plasma glucose — 2-hr oral glucose tolerance test. Normal fasting: 70–99</span>
+          <span class="field-error">Enter a value between 0 and 199</span>
+        </div>
+
+        <div class="field-group">
+          <label>Insulin (μU/mL)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="846" name="field5" placeholder="e.g. 80" required/>
+            <span class="range-tag">0 – 846</span>
+          </div>
+          <span class="field-hint">2-hour serum insulin. Normal: 16–166 μU/mL</span>
+          <span class="field-error">Enter a value between 0 and 846</span>
+        </div>
+
+        <div class="field-group">
+          <label>Blood Pressure (mmHg)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="122" name="field3" placeholder="e.g. 72" required/>
+            <span class="range-tag">0 – 122</span>
+          </div>
+          <span class="field-hint">Diastolic blood pressure. Normal: 60–80 mmHg</span>
+          <span class="field-error">Enter a value between 0 and 122</span>
+        </div>
+
+        <div class="field-group">
+          <label>BMI (kg/m²)</label>
+          <div class="input-wrap">
+            <input type="number" step="0.1" min="0" max="67.1" name="field6" placeholder="e.g. 28.5" required/>
+            <span class="range-tag">0 – 67.1</span>
+          </div>
+          <span class="field-hint">Body mass index = weight(kg) / height(m)². Normal: 18.5–24.9</span>
+          <span class="field-error">Enter a value between 0 and 67.1</span>
+        </div>
+
+        <div class="field-group">
+          <label>Skin Thickness (mm)</label>
+          <div class="input-wrap">
+            <input type="number" step="1" min="0" max="99" name="field4" placeholder="e.g. 20" required/>
+            <span class="range-tag">0 – 99</span>
+          </div>
+          <span class="field-hint">Triceps skinfold thickness. Typical: 10–40 mm</span>
+          <span class="field-error">Enter a value between 0 and 99</span>
+        </div>
+
+        <div class="field-group">
+          <label>Diabetes Pedigree Function</label>
+          <div class="input-wrap">
+            <input type="number" step="0.001" min="0.078" max="2.420" name="field7" placeholder="e.g. 0.500" required/>
+            <span class="range-tag">0.078 – 2.420</span>
+          </div>
+          <span class="field-hint">Genetic diabetes likelihood score based on family history</span>
+          <span class="field-error">Enter a value between 0.078 and 2.420</span>
+        </div>
+
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-predict">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          Analyze &amp; Predict
+        </button>
+      </div>
+
+    </form>
+
+    <div class="disclaimer">
+      ⚠️ This tool is for <strong>educational purposes only</strong> and does not constitute medical advice. Always consult a qualified healthcare professional for diagnosis and treatment.
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="footer-logo" href="{{ url_for('main') }}">
+          <span class="footer-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </span>
+          DiseasePredict
+        </a>
+        <p class="footer-tagline">AI-powered early disease risk assessment built by B.Tech CSE students with real clinical data.</p>
+        <div class="footer-badges">
+          <span class="fbadge">Flask</span>
+          <span class="fbadge">scikit-learn</span>
+          <span class="fbadge">Privacy First</span>
+        </div>
+      </div>
+      <div class="footer-nav-group">
+        <div class="footer-col">
+          <div class="footer-col-title">Predictions</div>
+          <ul>
+            <li><a href="{{ url_for('diabetes') }}">Diabetes</a></li>
+            <li><a href="{{ url_for('heartdisease') }}">Heart Disease</a></li>
+            <li><a href="{{ url_for('parkinsons') }}">Parkinson's</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span>© 2025 DiseasePredict · CSE2026 GEC Dumka</span>
+      <div class="footer-warning">Educational use only · not a medical substitute</div>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/validate.js') }}"></script>
+<script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+</body>
+</html>
