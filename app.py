@@ -8,7 +8,7 @@ try:
 except RuntimeError:
     pass
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import numpy as np
 import pickle
 
@@ -17,6 +17,13 @@ MODEL_DIR = BASE_DIR / "models"
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+
+SRC_DIR = BASE_DIR / "src"
+
+
+@app.route("/src/<path:filename>")
+def serve_src(filename):
+    return send_from_directory(SRC_DIR, filename)
 
 
 def _load_model(name: str):

@@ -11,14 +11,61 @@
 {% include 'partials/nav.html' %}
 
 <div class="page-wrapper">
+
   <div class="form-header">
-    <a class="back-link" href="/">← Back to Home</a>
-    <h1>❤️ Heart Disease Prediction</h1>
+    <a class="back-link" href="{{ url_for('main') }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Back to Home
+    </a>
+    <div class="form-header-badge">Screening Tool · 02</div>
+    <h1>❤️ Heart Disease Risk Assessment</h1>
     <p>Provide your cardiac clinical values to evaluate heart disease risk</p>
+    <div class="form-header-meta">
+      <span class="fh-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Data not stored
+      </span>
+      <span class="fh-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Results in &lt;1 second
+      </span>
+      <span class="fh-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        PDF report available
+      </span>
+    </div>
+  </div>
+
+  <div class="form-info-strip">
+    <div class="fi-card">
+      <span class="fi-icon" style="background:rgba(108,92,231,0.12);color:#a29bfe">❤️</span>
+      <div>
+        <strong>13 Parameters</strong>
+        <span>Cardiac &amp; clinical markers</span>
+      </div>
+    </div>
+    <div class="fi-card">
+      <span class="fi-icon" style="background:rgba(0,206,201,0.12);color:#00cec9">📊</span>
+      <div>
+        <strong>Risk Score</strong>
+        <span>Visual gauge + factor bars</span>
+      </div>
+    </div>
+    <div class="fi-card">
+      <span class="fi-icon" style="background:rgba(253,121,168,0.12);color:#fd79a8">🧬</span>
+      <div>
+        <strong>UCI Dataset</strong>
+        <span>Heart Disease Cleveland data</span>
+      </div>
+    </div>
   </div>
 
   <div class="form-container">
     <form action="{{ url_for('predictheartdisease') }}" method="post" id="mainForm">
+
+      <div class="form-section-label">Patient Information</div>
       <div class="form-grid">
 
         <div class="field-group">
@@ -40,6 +87,11 @@
           <span class="field-hint">0 = Female, 1 = Male</span>
           <span class="field-error">Enter 0 (Female) or 1 (Male)</span>
         </div>
+
+      </div>
+
+      <div class="form-section-label">Cardiac Symptoms &amp; History</div>
+      <div class="form-grid">
 
         <div class="field-group">
           <label>Chest Pain Type (CP)</label>
@@ -80,6 +132,11 @@
           <span class="field-hint">1 if fasting blood sugar &gt; 120 mg/dL, else 0</span>
           <span class="field-error">Enter 0 or 1</span>
         </div>
+
+      </div>
+
+      <div class="form-section-label">ECG &amp; Exercise Metrics</div>
+      <div class="form-grid">
 
         <div class="field-group">
           <label>Resting ECG (RestECG)</label>
@@ -131,6 +188,11 @@
           <span class="field-error">Enter 0, 1 or 2</span>
         </div>
 
+      </div>
+
+      <div class="form-section-label">Additional Diagnostics</div>
+      <div class="form-grid">
+
         <div class="field-group">
           <label>Major Vessels (CA)</label>
           <div class="input-wrap">
@@ -154,16 +216,68 @@
       </div>
 
       <div class="submit-row">
-        <button type="submit" class="btn-predict">Analyze &amp; Predict</button>
+        <button type="submit" class="btn-predict">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          Analyze &amp; Predict
+        </button>
       </div>
+
     </form>
 
     <div class="disclaimer">
-      ⚠️ This tool is for educational purposes only and should not replace professional medical diagnosis.
+      ⚠️ This tool is for <strong>educational purposes only</strong> and does not constitute medical advice. Always consult a qualified healthcare professional for diagnosis and treatment.
     </div>
   </div>
+
 </div>
 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="footer-logo" href="{{ url_for('main') }}">
+          <span class="footer-logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </span>
+          DiseasePredict
+        </a>
+        <p class="footer-tagline">AI-powered early disease risk assessment built by B.Tech CSE students with real clinical data.</p>
+        <div class="footer-badges">
+          <span class="fbadge">Flask</span>
+          <span class="fbadge">scikit-learn</span>
+          <span class="fbadge">Privacy First</span>
+        </div>
+      </div>
+      <div class="footer-nav-group">
+        <div class="footer-col">
+          <div class="footer-col-title">Predictions</div>
+          <ul>
+            <li><a href="{{ url_for('diabetes') }}">Diabetes</a></li>
+            <li><a href="{{ url_for('heartdisease') }}">Heart Disease</a></li>
+            <li><a href="{{ url_for('parkinsons') }}">Parkinson's</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 DiseasePredict &middot; CSE2026 GEC Dumka</span>
+      <div class="footer-warning">Educational use only &middot; not a medical substitute</div>
+    </div>
+  </div>
+</footer>
+
 <script src="{{ url_for('static', filename='js/validate.js') }}"></script>
+<script src="{{ url_for('static', filename='js/animations.js') }}"></script>
 </body>
 </html>
